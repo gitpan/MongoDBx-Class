@@ -1,0 +1,31 @@
+---
+abstract: 'Flexible ORM for MongoDB databases'
+author:
+  - 'Ido Perlmuter <ido@ido50.net>'
+build_requires:
+  Test::More: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.31
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.102343, CPAN::Meta::Converter version 2.102160'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: MongoDBx-Class
+requires:
+  Carp: 0
+  Module::Pluggable: 0
+  MongoDB: 0.40
+  MongoDB::Collection: 0
+  MongoDB::Connection: 0
+  MongoDB::Cursor: 0
+  MongoDB::Database: 0
+  Moose: 0
+  Moose::Exporter: 0
+  Moose::Role: 0
+  Moose::Util::TypeConstraints: 0
+  Scalar::Util: 0
+  namespace::autoclean: 0
+  perl: 5.006
+version: 0.1
