@@ -1,6 +1,6 @@
 package MongoDBx::Class::Cursor;
 BEGIN {
-  $MongoDBx::Class::Cursor::VERSION = '0.1';
+  $MongoDBx::Class::Cursor::VERSION = '0.2';
 }
 
 # ABSTRACT: A MongoDBx::Class cursor/iterator object for query results
@@ -16,7 +16,7 @@ MongoDBx::Class::Cursor - A MongoDBx::Class cursor/iterator object for query res
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 EXTENDS
 

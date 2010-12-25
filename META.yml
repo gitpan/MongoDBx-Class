@@ -28,4 +28,4 @@ requires:
   Scalar::Util: 0
   namespace::autoclean: 0
   perl: 5.006
-version: 0.1
+version: 0.2

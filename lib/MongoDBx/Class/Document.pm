@@ -1,6 +1,6 @@
 package MongoDBx::Class::Document;
 BEGIN {
-  $MongoDBx::Class::Document::VERSION = '0.1';
+  $MongoDBx::Class::Document::VERSION = '0.2';
 }
 
 # ABSTRACT: A MongoDBx::Class document role
@@ -14,7 +14,7 @@ MongoDBx::Class::Document - A MongoDBx::Class document role
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 SYNOPSIS
 

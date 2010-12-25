@@ -1,6 +1,6 @@
 package MongoDBx::Class::EmbeddedDocument;
 BEGIN {
-  $MongoDBx::Class::EmbeddedDocument::VERSION = '0.1';
+  $MongoDBx::Class::EmbeddedDocument::VERSION = '0.2';
 }
 
 # ABSTRACT: A MongoDBx::Class embedded (sub-)document role
@@ -14,7 +14,7 @@ MongoDBx::Class::EmbeddedDocument - A MongoDBx::Class embedded (sub-)document ro
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 SYNOPSIS
 

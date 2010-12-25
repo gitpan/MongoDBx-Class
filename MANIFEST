@@ -19,11 +19,11 @@ lib/MongoDBx/Class/Reference.pm
 lib/MongoDBx/Class/Tutorial.pod
 t/00-load.t
 t/01-simple.t
-t/Schema/Novel.pm
-t/Schema/PersonName.pm
-t/Schema/Review.pm
-t/Schema/Synopsis.pm
-t/Schema/Tag.pm
+t/lib/Schema/Novel.pm
+t/lib/Schema/PersonName.pm
+t/lib/Schema/Review.pm
+t/lib/Schema/Synopsis.pm
+t/lib/Schema/Tag.pm
 t/release-dist-manifest.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
