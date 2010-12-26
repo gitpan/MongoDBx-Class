@@ -4,7 +4,7 @@
       "Ido Perlmuter <ido@ido50.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.102343, CPAN::Meta::Converter version 2.102160",
+   "generated_by" : "Dist::Zilla version 4.102345, CPAN::Meta::Converter version 2.102160",
    "license" : [
       "perl_5"
    ],
@@ -44,6 +44,6 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.2"
+   "version" : "0.3"
 }
 

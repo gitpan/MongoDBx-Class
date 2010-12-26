@@ -1,6 +1,6 @@
 package MongoDBx::Class::Reference;
 BEGIN {
-  $MongoDBx::Class::Reference::VERSION = '0.2';
+  $MongoDBx::Class::Reference::VERSION = '0.3';
 }
 
 # ABSTRACT: An embedded document representing a reference to a different document (thus establishing a relationship)
@@ -14,7 +14,7 @@ MongoDBx::Class::Reference - An embedded document representing a reference to a 
 
 =head1 VERSION
 
-version 0.2
+version 0.3
 
 =head1 CONSUMES
 
@@ -25,9 +25,9 @@ L<MongoDBx::Class::EmbeddedDocument>
 This class represents a reference (or "join") to a MongoDB document.
 In L<MongoDBx::Class>, references are expected to be in the DBRef format,
 as defined in L<http://www.mongodb.org/display/DOCS/Database+References>,
-for example:
+for example (this is a JSON example):
 
-	{ '$ref': "collection_name", '$id': MongoDB::OID->new(value => "4cbca90d3a41e35916720100") }
+	{ "$ref": "collection_name", "$id": ObjectId("4cbca90d3a41e35916720100") }
 
 =cut
 
@@ -61,7 +61,8 @@ the following methods are provided:
 
 =head2 load()
 
-Returns the document referenced by this object, after expansion.
+Returns the document referenced by this object, after expansion. This is
+mostly used internally, you don't have to worry about it.
 
 =cut
 

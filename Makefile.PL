@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     'Scalar::Util' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.2',
+  'VERSION' => '0.3',
   'test' => {
     'TESTS' => 't/*.t'
   }

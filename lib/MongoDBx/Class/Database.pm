@@ -1,6 +1,6 @@
 package MongoDBx::Class::Database;
 BEGIN {
-  $MongoDBx::Class::Database::VERSION = '0.2';
+  $MongoDBx::Class::Database::VERSION = '0.3';
 }
 
 # ABSTRACT: A MongoDBx::Class database object
@@ -16,7 +16,7 @@ MongoDBx::Class::Database - A MongoDBx::Class database object
 
 =head1 VERSION
 
-version 0.2
+version 0.3
 
 =head1 EXTENDS
 
@@ -25,7 +25,7 @@ L<MongoDB::Database>
 =head1 SYNOPSIS
 
 	# get a database object from your connection object
-	my $db = $conn->get_database($db_name); # or simply $conn->$db_name
+	my $db = $dbx->conn->get_database($db_name); # or simply $dbx->conn->$db_name
 
 =head1 DESCRIPTION
 
