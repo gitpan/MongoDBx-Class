@@ -1,6 +1,6 @@
 package MongoDBx::Class::Document;
 BEGIN {
-  $MongoDBx::Class::Document::VERSION = '0.3';
+  $MongoDBx::Class::Document::VERSION = '0.4';
 }
 
 # ABSTRACT: A MongoDBx::Class document role
@@ -14,7 +14,7 @@ MongoDBx::Class::Document - A MongoDBx::Class document role
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head1 SYNOPSIS
 
@@ -31,6 +31,8 @@ version 0.3
 	holds_one 'author' => (is => 'ro', isa => 'MyApp::Schema::PersonName', required => 1, writer => 'set_author');
 
 	has 'year' => (is => 'ro', isa => 'Int', predicate => 'has_year', writer => 'set_year');
+
+	has 'added' => (is => 'ro', isa => 'DateTime', traits => ['Parsed'], required => 1);
 	
 	holds_many 'tags' => (is => 'ro', isa => 'MyApp::Schema::Tag', predicate => 'has_tags');
 
@@ -154,27 +156,26 @@ sub update {
 	my $self = shift;
 
 	if (scalar @_ && ref $_[0] eq 'HASH') {
-		foreach (keys %{$_[0]}) {
-			$_[0]->{$_} = $self->_connection->collapse($_[0]->{$_});
-		}
-		$self->_collection->update({ _id => $self->_id }, { '$set' => $_[0] }, $_[1]);
+		$_[0]->{_class} = $self->_class;
+		my $doc = $self->_connection->collapse($_[0]);
+		delete $doc->{_class};
+
+		$self->_collection->update({ _id => $self->_id }, { '$set' => $doc }, $_[1]);
 	} else {
-		my $new_doc;
-		foreach (ref($self)->meta->get_all_attributes) {
+		my $doc = { _class => $self->_class };
+		foreach ($self->meta->get_all_attributes) {
 			my $name = $_->name;
 			next if $name eq '_collection' || $name eq '_class';
-
-			my $newval = $self->_connection->collapse($self->$name);
+			my $val = $self->$name;
 
 			$name =~ s/^_// if ($_->{isa} eq 'MongoDBx::Class::CoercedReference' ||
 					    $_->{isa} eq 'ArrayOfMongoDBx::Class::CoercedReference' ||
 					    ($_->documentation && $_->documentation eq 'MongoDBx::Class::EmbeddedDocument')
 					   );
 
-			$new_doc->{$name} = $newval;
+			$doc->{$name} = $val;
 		}
-		$new_doc->{_class} = $self->_class;
-		$self->_collection->update({ _id => $self->_id }, $new_doc, $_[1]);
+		$self->_collection->update({ _id => $self->_id }, $self->_connection->collapse($doc), $_[1]);
 	}
 }
 
@@ -202,7 +203,7 @@ sub remove {
 
 =head2 _database()
 
-Convenience method, shortcut for C<<$doc->_collection->_database>>.
+Convenience method, shortcut for C<< $doc->_collection->_database >>.
 
 =cut
 
@@ -212,12 +213,35 @@ sub _database {
 
 =head2 _connection()
 
-Convenience method, shortcut for C<<$doc->_database->_connection>>.
+Convenience method, shortcut for C<< $doc->_database->_connection >>.
 
 =cut
 
 sub _connection {
 	shift->_database->_connection;
+}
+
+=head2 _attributes()
+
+Returns a list of names of all attributes the document object has, minus
+'_collection' and '_class', sorted alphabetically.
+
+=cut
+
+sub _attributes {
+	my @names;
+	foreach (shift->meta->get_all_attributes) {
+		next if $_->name =~ m/^_(class|collection)$/;
+		if ($_->{isa} =~ m/MongoDBx::Class::CoercedReference/ || ($_->documentation && $_->documentation eq 'MongoDBx::Class::EmbeddedDocument')) {
+			my $name = $_->name;
+			$name =~ s/^_//;
+			push(@names, $name);
+		} else {
+			push(@names, $_->name);
+		}
+	}
+
+	return sort @names;
 }
 
 =head1 AUTHOR

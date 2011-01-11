@@ -4,7 +4,7 @@
       "Ido Perlmuter <ido@ido50.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.102345, CPAN::Meta::Converter version 2.102160",
+   "generated_by" : "Dist::Zilla version 4.102343, CPAN::Meta::Converter version 2.102160",
    "license" : [
       "perl_5"
    ],
@@ -22,6 +22,8 @@
       "runtime" : {
          "requires" : {
             "Carp" : 0,
+            "DateTime::Format::W3CDTF" : 0,
+            "Module::Load" : 0,
             "Module::Pluggable" : 0,
             "MongoDB" : "0.40",
             "MongoDB::Collection" : 0,
@@ -32,18 +34,18 @@
             "Moose::Exporter" : 0,
             "Moose::Role" : 0,
             "Moose::Util::TypeConstraints" : 0,
-            "Scalar::Util" : 0,
             "namespace::autoclean" : 0,
             "perl" : "5.006"
          }
       },
       "test" : {
          "requires" : {
+            "DateTime" : 0,
             "Test::More" : 0
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0.3"
+   "version" : "0.4"
 }
 

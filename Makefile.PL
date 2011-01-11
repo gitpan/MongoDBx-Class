@@ -12,6 +12,7 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'Flexible ORM for MongoDB databases',
   'AUTHOR' => 'Ido Perlmuter <ido@ido50.net>',
   'BUILD_REQUIRES' => {
+    'DateTime' => '0',
     'Test::More' => '0'
   },
   'CONFIGURE_REQUIRES' => {
@@ -23,6 +24,8 @@ my %WriteMakefileArgs = (
   'NAME' => 'MongoDBx::Class',
   'PREREQ_PM' => {
     'Carp' => '0',
+    'DateTime::Format::W3CDTF' => '0',
+    'Module::Load' => '0',
     'Module::Pluggable' => '0',
     'MongoDB' => '0.40',
     'MongoDB::Collection' => '0',
@@ -33,10 +36,9 @@ my %WriteMakefileArgs = (
     'Moose::Exporter' => '0',
     'Moose::Role' => '0',
     'Moose::Util::TypeConstraints' => '0',
-    'Scalar::Util' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.3',
+  'VERSION' => '0.4',
   'test' => {
     'TESTS' => 't/*.t'
   }

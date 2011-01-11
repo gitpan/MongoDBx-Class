@@ -1,6 +1,6 @@
 package MongoDBx::Class::Reference;
 BEGIN {
-  $MongoDBx::Class::Reference::VERSION = '0.3';
+  $MongoDBx::Class::Reference::VERSION = '0.4';
 }
 
 # ABSTRACT: An embedded document representing a reference to a different document (thus establishing a relationship)
@@ -14,7 +14,7 @@ MongoDBx::Class::Reference - An embedded document representing a reference to a 
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head1 CONSUMES
 

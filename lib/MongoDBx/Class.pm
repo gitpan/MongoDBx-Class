@@ -1,6 +1,6 @@
 package MongoDBx::Class;
 BEGIN {
-  $MongoDBx::Class::VERSION = '0.3';
+  $MongoDBx::Class::VERSION = '0.4';
 }
 
 # ABSTRACT: Flexible ORM for MongoDB databases
@@ -14,6 +14,7 @@ use MongoDBx::Class::Database;
 use MongoDBx::Class::Collection;
 use MongoDBx::Class::Cursor;
 use MongoDBx::Class::Reference;
+use MongoDBx::Class::Meta::AttributeTraits;
 use Carp;
 
 # let's set some internal subtypes we can use to automatically coerce
@@ -38,20 +39,13 @@ coerce 'ArrayOfMongoDBx::Class::CoercedReference'
 		return \@arr;
 	};
 
-# class attributes
-has 'namespace' => (is => 'ro', isa => 'Str', required => 1);
-
-has 'conn' => (is => 'ro', isa => 'MongoDB::Connection', predicate => 'is_connected', writer => '_set_conn', clearer => '_clear_conn');
-
-has 'doc_classes' => (is => 'ro', isa => 'HashRef', default => sub { {} });
-
 =head1 NAME
 
 MongoDBx::Class - Flexible ORM for MongoDB databases
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head1 SYNOPSIS
 
@@ -160,7 +154,7 @@ benchmarks, an application converted from Mongoose to MongoDBx::Class
 showed an increase of speed in orders of magnitude.
 
 =item * In Mongoose, your document class attributes are expected to be
-read-write (i.e. C<<is => 'rw'>> in Moose), otherwise expansion will fail.
+read-write (i.e. C<< is => 'rw' >> in Moose), otherwise expansion will fail.
 This is not the case with MongoDBx::Class, your attributes can safely be
 read-only.
 
@@ -182,7 +176,8 @@ want to use KiokuDB.
 
 =head2 CAVEATS AND THINGS TO CONSIDER
 
-There are two main caveats when using MongoDBx::Class as of today:
+There are a few caveats and important facts to take note of when using
+MongoDBx::Class as of today:
 
 =over 4
 
@@ -218,6 +213,14 @@ It also contains a list of frequently asked questions.
 
 =head1 ATTRIBUTES
 
+=cut
+
+has 'namespace' => (is => 'ro', isa => 'Str', required => 1);
+
+has 'conn' => (is => 'ro', isa => 'MongoDB::Connection', predicate => 'is_connected', writer => '_set_conn', clearer => '_clear_conn');
+
+has 'doc_classes' => (is => 'ro', isa => 'HashRef', default => sub { {} });
+
 =head2 namespace
 
 A string representing the namespace of the MongoDB schema used (e.g.
@@ -250,7 +253,9 @@ connection to a MongoDB server is made yet.
 Initiates a new connection to a MongoDB server running on a certain host
 and listening to a certain port. If a host is not provided, 'localhost'
 is used. If a port is not provided, 27017 (MongoDB's default port) is
-used. The database name is required.
+used. The database name is required. The created L<MongoDBx::Connection>
+object is both returned, and also saved in the calling object's 'conn'
+attribute.
 
 =cut
 
@@ -274,22 +279,12 @@ The following methods are only to be used internally.
 =head2 BUILD()
 
 Automatically called when creating a new instance of this module. This
-simply calls C<_load_schema()>.
-
-=cut
-
-sub BUILD {
-	shift->_load_schema;
-}
-
-=head2 _load_schema()
-
-Loads the schema and saves a hash-ref of document classes found in the object.
+loads the schema and saves a hash-ref of document classes found in the object.
 Automatic loading courtesy of L<Module::Pluggable>.
 
 =cut
 
-sub _load_schema {
+sub BUILD {
 	my $self = shift;
 
 	# load the classes
@@ -312,10 +307,6 @@ sub _load_schema {
 types consistent. Either use the full package names or the short class names.
 
 =item * Add support for the L<AnyMongo> driver.
-
-=item * Add some automatic data type inflations which are not natively supported
-by L<MongoDB>. Also add an alternative to MongoDB's DateTime native inflation,
-which doesn't support pre-epoch dates.
 
 =item * Add support for document attributes which are not to be saved in the database.
 

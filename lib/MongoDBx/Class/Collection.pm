@@ -1,6 +1,6 @@
 package MongoDBx::Class::Collection;
 BEGIN {
-  $MongoDBx::Class::Collection::VERSION = '0.3';
+  $MongoDBx::Class::Collection::VERSION = '0.4';
 }
 
 # ABSTRACT: A MongoDBx::Class collection object
@@ -17,7 +17,7 @@ MongoDBx::Class::Collection - A MongoDBx::Class collection object
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head1 EXTENDS
 
@@ -143,7 +143,7 @@ around 'find_one' => sub {
 
 	my $query = {};
 
-	if ($orig_query && ref $orig_query eq 'SCALAR') {
+	if ($orig_query && !ref $orig_query && length($orig_query) == 24) {
 		$query->{_id} = MongoDB::OID->new(value => $orig_query);
 	} elsif ($orig_query && ref $orig_query eq 'MongoDB::OID') {
 		$query->{_id} = $orig_query;
@@ -154,11 +154,10 @@ around 'find_one' => sub {
 	return $self->$orig($query, $fields);
 };
 
-=head2 insert( \%doc, [ \%opts ] )
+=head2 insert( $doc, [ \%opts ] )
 
-Inserts the given document into the database. As opposed to the original
-insert method in L<MongoDB::Collection>, this method (currently) only
-accepts a hash-ref as the document to insert, and will C<croak> otherwise.
+Inserts the given document into the database, automatically collapsing
+it before insertion.
 
 An optional options hash-ref can be passed. If this hash-ref holds a safe
 key with a true value, insert will be safe (refer to L<MongoDB::Collection/"insert ($object, $options?)">
@@ -171,6 +170,10 @@ for the safe attribute, insert will be safe by default. If that is the case,
 and you want the specific insert to be unsafe, pass a false value for
 C<safe> in the C<\%opts> hash-ref.
 
+Document to insert can either be a hash-ref, a L<Tie::IxHash> object or
+an even-numbered array-ref, but currently only hash-refs are automatically
+collapsed.
+
 =head2 batch_insert( \@docs, [ \%opts ] )
 
 Receives an array-ref of documents and an optional hash-ref of options,
@@ -181,9 +184,9 @@ safe attribute), inserts will be safe, and an array of all the documents
 inserted (after expansion) will be returned. If false, an array with all
 the document IDs is returned.
 
-Documents to insert must (temporarily) be hash references. If one (or more) documents
-are not, this method will croak. No documents will be inserted even if
-just one is not a hash-ref and the rest are.
+Documents to insert can either be hash-refs, L<Tie::IxHash> objects or
+even-numbered array references, but currently only hash-refs are automatically
+collapsed.
 
 =cut
 
@@ -194,14 +197,8 @@ around 'batch_insert' => sub {
 	$opts->{safe} = 1 if $self->_database->_connection->safe && !defined $opts->{safe};
 
 	foreach (@$docs) {
-		croak 'Document to insert must be a hash reference (received '.ref($_).')'
-			unless ref $_ eq 'HASH';
-	}
-
-	foreach (@$docs) {
-		foreach my $attr (keys %$_) {
-			$_->{$attr} = $self->_database->_connection->collapse($_->{$attr});
-		}
+		next unless ref $_ eq 'HASH' && $_->{_class};
+		$_ = $self->_database->_connection->collapse($_);
 	}
 
 	if ($opts->{safe}) {
@@ -223,6 +220,10 @@ Do not use this method to update a specific document that you already
 have (i.e. after expansion). L<MongoDBx::Class::Document> has its own
 update method which is more convenient.
 
+Notice that this method doesn't collapse attributes with the
+L<Parsed|MongoDBx::Class::Meta::AttributeTraits> trait. Only the
+L<MongoDBx::Class::Document> update method performs that.
+
 =cut
 
 around 'update' => sub {
@@ -234,7 +235,7 @@ around 'update' => sub {
 	croak 'Object for update must be a hash reference (received '.ref($object).').'
 		unless ref $object eq 'HASH';
 
-	$self->_collapse_hash($criteria);
+	$self->_collapse_hash($object);
 
 	return $self->$orig($criteria, $object, $opts);
 };
@@ -242,8 +243,8 @@ around 'update' => sub {
 =head2 ensure_index( $keys, [ \%options ] )
 
 Makes sure the given keys of this collection are indexed. C<$keys> is either
-an unordered hash-ref, an ordered L<Tie::IxHash> object, or an ordered
-array reference like this:
+an unordered hash-ref, an ordered L<Tie::IxHash> object, or an ordered,
+even-numbered array reference like this:
 
 	$coll->ensure_index([ title => 1, date => -1 ])
 
@@ -274,10 +275,10 @@ sub _collapse_hash {
 
 	foreach (keys %$object) {
 		if (m/^\$/ && ref $object->{$_} eq 'HASH') {
-			# this is something like '$set', we need to collapse the values in it
-			$object->{$_} = $self->_collapse_hash($object->{$_});
+			# this is something like '$set' or '$inc', we need to collapse the values in it
+			$self->_collapse_hash($object->{$_});
 		} else {
-			$object->{$_} = $self->_database->_connection->collapse($object->{$_});
+			$object->{$_} = $self->_database->_connection->_collapse_val($object->{$_});
 		}
 	}
 }

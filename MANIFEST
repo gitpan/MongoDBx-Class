@@ -14,7 +14,10 @@ lib/MongoDBx/Class/Cursor.pm
 lib/MongoDBx/Class/Database.pm
 lib/MongoDBx/Class/Document.pm
 lib/MongoDBx/Class/EmbeddedDocument.pm
+lib/MongoDBx/Class/Meta/AttributeTraits.pm
 lib/MongoDBx/Class/Moose.pm
+lib/MongoDBx/Class/ParsedAttribute.pm
+lib/MongoDBx/Class/ParsedAttribute/DateTime.pm
 lib/MongoDBx/Class/Reference.pm
 lib/MongoDBx/Class/Tutorial.pod
 t/00-load.t

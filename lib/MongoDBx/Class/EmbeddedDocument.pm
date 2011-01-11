@@ -1,6 +1,6 @@
 package MongoDBx::Class::EmbeddedDocument;
 BEGIN {
-  $MongoDBx::Class::EmbeddedDocument::VERSION = '0.3';
+  $MongoDBx::Class::EmbeddedDocument::VERSION = '0.4';
 }
 
 # ABSTRACT: A MongoDBx::Class embedded (sub-)document role
@@ -14,7 +14,7 @@ MongoDBx::Class::EmbeddedDocument - A MongoDBx::Class embedded (sub-)document ro
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head1 SYNOPSIS
 
@@ -81,12 +81,35 @@ The following methods are provided:
 
 =head2 _database()
 
-Convenience shortcut for running C<<$embd_doc->_collection->_database>>.
+Convenience shortcut for running C<< $embd_doc->_collection->_database >>.
 
 =cut
 
 sub _database {
 	shift->_collection->_database;
+}
+
+=head2 _attributes()
+
+Returns a list of names of all attributes the embedded document object has,
+minus '_collection' and '_class', sorted alphabetically.
+
+=cut
+
+sub _attributes {
+	my @names;
+	foreach (shift->meta->get_all_attributes) {
+		next if $_->name =~ m/^_(class|collection)$/;
+		if ($_->{isa} =~ m/MongoDBx::Class::CoercedReference/ || ($_->documentation && $_->documentation eq 'MongoDBx::Class::EmbeddedDocument')) {
+			my $name = $_->name;
+			$name =~ s/^_//;
+			push(@names, $name);
+		} else {
+			push(@names, $_->name);
+		}
+	}
+
+	return sort @names;
 }
 
 =head1 AUTHOR

@@ -2,7 +2,7 @@ NAME
     MongoDBx::Class - Flexible ORM for MongoDB databases
 
 VERSION
-    version 0.3
+    version 0.4
 
 SYNOPSIS
             use MongoDBx::Class;
@@ -107,7 +107,7 @@ DESCRIPTION
         MongoDBx::Class showed an increase of speed in orders of magnitude.
 
     *   In Mongoose, your document class attributes are expected to be
-        read-write (i.e. "<is =" 'rw'>> in Moose), otherwise expansion will
+        read-write (i.e. "is => 'rw'" in Moose), otherwise expansion will
         fail. This is not the case with MongoDBx::Class, your attributes can
         safely be read-only.
 
@@ -125,7 +125,8 @@ DESCRIPTION
     case when and why you should or shouldn't want to use KiokuDB.
 
   CAVEATS AND THINGS TO CONSIDER
-    There are two main caveats when using MongoDBx::Class as of today:
+    There are a few caveats and important facts to take note of when using
+    MongoDBx::Class as of today:
 
     *   It's alpha software. This is an early release, and bugs are found
         (and fixed) all the time. Don't rely on it for production use yet.
@@ -181,17 +182,16 @@ OBJECT METHODS
     Initiates a new connection to a MongoDB server running on a certain host
     and listening to a certain port. If a host is not provided, 'localhost'
     is used. If a port is not provided, 27017 (MongoDB's default port) is
-    used. The database name is required.
+    used. The database name is required. The created MongoDBx::Connection
+    object is both returned, and also saved in the calling object's 'conn'
+    attribute.
 
 INTERNAL METHODS
     The following methods are only to be used internally.
 
   BUILD()
     Automatically called when creating a new instance of this module. This
-    simply calls "_load_schema()".
-
-  _load_schema()
-    Loads the schema and saves a hash-ref of document classes found in the
+    loads the schema and saves a hash-ref of document classes found in the
     object. Automatic loading courtesy of Module::Pluggable.
 
 TODO
@@ -202,10 +202,6 @@ TODO
           class names.
 
     *     Add support for the AnyMongo driver.
-
-    *     Add some automatic data type inflations which are not natively
-          supported by MongoDB. Also add an alternative to MongoDB's
-          DateTime native inflation, which doesn't support pre-epoch dates.
 
     *     Add support for document attributes which are not to be saved in
           the database.
