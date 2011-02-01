@@ -1,12 +1,13 @@
 package MongoDBx::Class::Document;
 BEGIN {
-  $MongoDBx::Class::Document::VERSION = '0.4';
+  $MongoDBx::Class::Document::VERSION = '0.5';
 }
 
 # ABSTRACT: A MongoDBx::Class document role
 
 use Moose::Role;
 use namespace::autoclean;
+use Carp;
 
 =head1 NAME
 
@@ -14,7 +15,7 @@ MongoDBx::Class::Document - A MongoDBx::Class document role
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 SYNOPSIS
 
@@ -160,13 +161,18 @@ sub update {
 		my $doc = $self->_connection->collapse($_[0]);
 		delete $doc->{_class};
 
+		# update the database entry
 		$self->_collection->update({ _id => $self->_id }, { '$set' => $doc }, $_[1]);
+
+		# update the object itself
+		$self->_update_self;
 	} else {
 		my $doc = { _class => $self->_class };
 		foreach ($self->meta->get_all_attributes) {
 			my $name = $_->name;
 			next if $name eq '_collection' || $name eq '_class';
 			my $val = $self->$name;
+			next unless defined $val;
 
 			$name =~ s/^_// if ($_->{isa} eq 'MongoDBx::Class::CoercedReference' ||
 					    $_->{isa} eq 'ArrayOfMongoDBx::Class::CoercedReference' ||
@@ -242,6 +248,33 @@ sub _attributes {
 	}
 
 	return sort @names;
+}
+
+=head1 INTERNAL METHODS
+
+The following methods are only to be used internally.
+
+=head2 _update_self()
+
+Used by the C<update( \%changes )> method to update the object instance
+with the new values.
+
+=cut
+
+sub _update_self {
+	my $self = shift;
+
+	my $new_version = $self->_collection->find_one({ _id => $self->_id });
+	unless ($new_version) {
+		# huh?! we didn't find the document?!@? lets warn but not die
+		carp "Can't find document after update, object instance will remain unchanged.";
+		return;
+	}
+
+	foreach ($self->meta->get_all_attributes) {
+		my $new_val = $_->get_value($new_version);
+		$_->set_value($self, $new_val) if defined $new_val;
+	}
 }
 
 =head1 AUTHOR

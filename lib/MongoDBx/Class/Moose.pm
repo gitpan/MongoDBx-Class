@@ -1,6 +1,6 @@
 package MongoDBx::Class::Moose;
 BEGIN {
-  $MongoDBx::Class::Moose::VERSION = '0.4';
+  $MongoDBx::Class::Moose::VERSION = '0.5';
 }
 
 # ABSTRACT: Extends Moose with common relationships for MongoDBx::Class documents
@@ -14,7 +14,7 @@ MongoDBx::Class::Moose - Extends Moose with common relationships for MongoDBx::C
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 PROVIDES
 

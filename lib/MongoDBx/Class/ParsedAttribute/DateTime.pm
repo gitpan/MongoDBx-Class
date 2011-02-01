@@ -1,6 +1,6 @@
 package MongoDBx::Class::ParsedAttribute::DateTime;
 BEGIN {
-  $MongoDBx::Class::ParsedAttribute::DateTime::VERSION = '0.4';
+  $MongoDBx::Class::ParsedAttribute::DateTime::VERSION = '0.5';
 }
 
 # ABSTRACT: An automatic DateTime parser for MongoDBx::Class document classes
@@ -17,7 +17,7 @@ MongoDBx::Class::ParsedAttribute::DateTime - An automatic DateTime parser for Mo
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 SYNOPSIS
 
@@ -69,7 +69,7 @@ Converts a W3C datetime string to DateTime object.
 =cut
 
 sub expand {
-	$_[0]->f->parse_datetime($_[1]);
+	return eval { $_[0]->f->parse_datetime($_[1]) } || undef;
 }
 
 =head2 collapse( $dt )
@@ -79,7 +79,7 @@ Converts a DateTime object to a W3C datetime string.
 =cut
 
 sub collapse {
-	$_[0]->f->format_datetime($_[1]);
+	return eval { $_[0]->f->format_datetime($_[1]) } || undef;
 }
 
 =head1 AUTHOR

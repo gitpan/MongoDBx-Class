@@ -1,5 +1,14 @@
 Revision history for MongoDBx::Class
 
+0.5       2011-02-01 21:10:25 Asia/Jerusalem
+	- DateTime inflation/deflation in MongoDBx::Class::ParsedAttribute::DateTime
+	  is now evaled to prevent dies
+	- The argumented version of the update() method in MongoDBx::Class::Moose
+	  now also updates the document object with the new changes
+	- Updated test to reflect above change
+	- Fixed bug causing 'null' values being saved in the database when
+	  using the $doc->update() method.
+
 0.4       2011-01-11 22:25:54 Asia/Jerusalem
 	- Added the _attributes method to document objects (standalone/embedded)
 	- Added the ParsedAttribute role and the ParsedAttribute::DateTime class for

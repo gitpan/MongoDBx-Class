@@ -1,6 +1,6 @@
 package MongoDBx::Class;
 BEGIN {
-  $MongoDBx::Class::VERSION = '0.4';
+  $MongoDBx::Class::VERSION = '0.5';
 }
 
 # ABSTRACT: Flexible ORM for MongoDB databases
@@ -45,7 +45,7 @@ MongoDBx::Class - Flexible ORM for MongoDB databases
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 SYNOPSIS
 

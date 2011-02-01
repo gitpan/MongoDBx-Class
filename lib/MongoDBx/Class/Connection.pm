@@ -1,6 +1,6 @@
 package MongoDBx::Class::Connection;
 BEGIN {
-  $MongoDBx::Class::Connection::VERSION = '0.4';
+  $MongoDBx::Class::Connection::VERSION = '0.5';
 }
 
 # ABSTARCT: A connection to a MongoDB server
@@ -17,7 +17,7 @@ MongoDBx::Class::Connection - A connection to a MongoDB server
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 EXTENDS
 
@@ -200,8 +200,10 @@ sub expand {
 			}
 		# is this an expanded attribute?
 		} elsif ($_->does('MongoDBx::Class::Meta::AttributeTraits::Parsed') && $_->parser) {
+			next unless exists $doc->{$_->name} && defined $doc->{$_->name};
 			load $_->parser;
-			$attrs{$_->name} = $_->parser->new->expand($doc->{$_->name});
+			my $val = $_->parser->new->expand($doc->{$_->name});
+			$attrs{$_->name} = $val if defined $val;
 		# just pass the value as is
 		} else {
 			next unless exists $doc->{$_->name} && defined $doc->{$_->name};
