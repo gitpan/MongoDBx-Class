@@ -1,6 +1,6 @@
 package MongoDBx::Class::Meta::AttributeTraits;
 BEGIN {
-  $MongoDBx::Class::Meta::AttributeTraits::VERSION = '0.5';
+  $MongoDBx::Class::Meta::AttributeTraits::VERSION = '0.6';
 }
 
 # ABSTRACT: Attribute traits provided by MongoDBx::Class
@@ -11,13 +11,13 @@ MongoDBx::Class::Meta::AttributeTraits - Attribute traits provided by MongoDBx::
 
 =head1 VERSION
 
-version 0.5
+version 0.6
 
 =cut
 
 package MongoDBx::Class::Meta::AttributeTraits::Parsed;
 BEGIN {
-  $MongoDBx::Class::Meta::AttributeTraits::Parsed::VERSION = '0.5';
+  $MongoDBx::Class::Meta::AttributeTraits::Parsed::VERSION = '0.6';
 }
 
 # ABSTRACT: An attribute trait for attributes automatically expanded and collapsed by a parser class.
@@ -40,7 +40,7 @@ sub _build_parser {
 {
 	package Moose::Meta::Attribute::Custom::Trait::Parsed;
 BEGIN {
-  $Moose::Meta::Attribute::Custom::Trait::Parsed::VERSION = '0.5';
+  $Moose::Meta::Attribute::Custom::Trait::Parsed::VERSION = '0.6';
 }
 	sub register_implementation { 'MongoDBx::Class::Meta::AttributeTraits::Parsed' }
 }

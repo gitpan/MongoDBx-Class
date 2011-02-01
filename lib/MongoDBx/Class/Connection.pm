@@ -1,6 +1,6 @@
 package MongoDBx::Class::Connection;
 BEGIN {
-  $MongoDBx::Class::Connection::VERSION = '0.5';
+  $MongoDBx::Class::Connection::VERSION = '0.6';
 }
 
 # ABSTARCT: A connection to a MongoDB server
@@ -17,7 +17,7 @@ MongoDBx::Class::Connection - A connection to a MongoDB server
 
 =head1 VERSION
 
-version 0.5
+version 0.6
 
 =head1 EXTENDS
 

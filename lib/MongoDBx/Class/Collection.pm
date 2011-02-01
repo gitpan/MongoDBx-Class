@@ -1,6 +1,6 @@
 package MongoDBx::Class::Collection;
 BEGIN {
-  $MongoDBx::Class::Collection::VERSION = '0.5';
+  $MongoDBx::Class::Collection::VERSION = '0.6';
 }
 
 # ABSTRACT: A MongoDBx::Class collection object
@@ -17,7 +17,7 @@ MongoDBx::Class::Collection - A MongoDBx::Class collection object
 
 =head1 VERSION
 
-version 0.5
+version 0.6
 
 =head1 EXTENDS
 

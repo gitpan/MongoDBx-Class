@@ -1,6 +1,6 @@
 package MongoDBx::Class::ParsedAttribute::DateTime;
 BEGIN {
-  $MongoDBx::Class::ParsedAttribute::DateTime::VERSION = '0.5';
+  $MongoDBx::Class::ParsedAttribute::DateTime::VERSION = '0.6';
 }
 
 # ABSTRACT: An automatic DateTime parser for MongoDBx::Class document classes
@@ -17,7 +17,7 @@ MongoDBx::Class::ParsedAttribute::DateTime - An automatic DateTime parser for Mo
 
 =head1 VERSION
 
-version 0.5
+version 0.6
 
 =head1 SYNOPSIS
 

@@ -30,4 +30,4 @@ requires:
   Moose::Util::TypeConstraints: 0
   namespace::autoclean: 0
   perl: 5.006
-version: 0.5
+version: 0.6
