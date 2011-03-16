@@ -1,6 +1,6 @@
 package MongoDBx::Class::EmbeddedDocument;
 BEGIN {
-  $MongoDBx::Class::EmbeddedDocument::VERSION = '0.6';
+  $MongoDBx::Class::EmbeddedDocument::VERSION = '0.7';
 }
 
 # ABSTRACT: A MongoDBx::Class embedded (sub-)document role
@@ -14,7 +14,7 @@ MongoDBx::Class::EmbeddedDocument - A MongoDBx::Class embedded (sub-)document ro
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 SYNOPSIS
 
@@ -78,6 +78,24 @@ has '_class' => (is => 'ro', isa => 'Str', required => 1);
 =head1 METHODS
 
 The following methods are provided:
+
+=head2 as_hashref()
+
+Returns the embedded document as a hash reference, without the _collection
+and _class attributes (if they exist).
+
+=cut
+
+sub as_hashref {
+	my ($self, $hash) = (shift, {});
+
+	foreach my $ha (keys %$self) {
+		next if $ha eq '_collection' || $ha eq '_class';
+		$hash->{$ha} = $self->{$ha};
+	}
+
+	return $hash;
+}
 
 =head2 _database()
 
@@ -156,7 +174,7 @@ L<MongoDBx::Class::Moose>, L<MongoDBx::Class::Document>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

@@ -6,6 +6,7 @@ META.json
 META.yml
 Makefile.PL
 README
+SIGNATURE
 dist.ini
 lib/MongoDBx/Class.pm
 lib/MongoDBx/Class/Collection.pm

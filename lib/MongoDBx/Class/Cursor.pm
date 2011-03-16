@@ -1,6 +1,6 @@
 package MongoDBx::Class::Cursor;
 BEGIN {
-  $MongoDBx::Class::Cursor::VERSION = '0.6';
+  $MongoDBx::Class::Cursor::VERSION = '0.7';
 }
 
 # ABSTRACT: A MongoDBx::Class cursor/iterator object for query results
@@ -16,7 +16,7 @@ MongoDBx::Class::Cursor - A MongoDBx::Class cursor/iterator object for query res
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 EXTENDS
 
@@ -126,7 +126,7 @@ L<MongoDBx::Class::Collection>, L<MongoDB::Cursor>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

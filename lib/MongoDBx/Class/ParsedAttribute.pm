@@ -1,6 +1,6 @@
 package MongoDBx::Class::ParsedAttribute;
 BEGIN {
-  $MongoDBx::Class::ParsedAttribute::VERSION = '0.6';
+  $MongoDBx::Class::ParsedAttribute::VERSION = '0.7';
 }
 
 # ABSTRACT: A Moose role for automatically expanded and collapsed document attributes.
@@ -18,7 +18,7 @@ MongoDBx::Class::ParsedAttribute - A Moose role for automatically expanded and c
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 SYNOPSIS
 
@@ -125,7 +125,7 @@ L<MongoDBx::Class::EmbeddedDocument>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

@@ -1,6 +1,6 @@
 package MongoDBx::Class::Reference;
 BEGIN {
-  $MongoDBx::Class::Reference::VERSION = '0.6';
+  $MongoDBx::Class::Reference::VERSION = '0.7';
 }
 
 # ABSTRACT: An embedded document representing a reference to a different document (thus establishing a relationship)
@@ -14,7 +14,7 @@ MongoDBx::Class::Reference - An embedded document representing a reference to a 
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 CONSUMES
 
@@ -116,7 +116,7 @@ L<MongoDBx::Class::EmbeddedDocument>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

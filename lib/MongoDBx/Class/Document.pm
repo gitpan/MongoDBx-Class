@@ -1,6 +1,6 @@
 package MongoDBx::Class::Document;
 BEGIN {
-  $MongoDBx::Class::Document::VERSION = '0.6';
+  $MongoDBx::Class::Document::VERSION = '0.7';
 }
 
 # ABSTRACT: A MongoDBx::Class document role
@@ -15,7 +15,7 @@ MongoDBx::Class::Document - A MongoDBx::Class document role
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 SYNOPSIS
 
@@ -321,7 +321,7 @@ L<MongoDBx::Class::Moose>, L<MongoDBx::Class::EmbeddedDocument>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

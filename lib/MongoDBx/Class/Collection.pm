@@ -1,6 +1,6 @@
 package MongoDBx::Class::Collection;
 BEGIN {
-  $MongoDBx::Class::Collection::VERSION = '0.6';
+  $MongoDBx::Class::Collection::VERSION = '0.7';
 }
 
 # ABSTRACT: A MongoDBx::Class collection object
@@ -17,7 +17,7 @@ MongoDBx::Class::Collection - A MongoDBx::Class collection object
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 EXTENDS
 
@@ -327,7 +327,7 @@ L<MongoDB::Collection>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

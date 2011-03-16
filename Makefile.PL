@@ -38,7 +38,7 @@ my %WriteMakefileArgs = (
     'Moose::Util::TypeConstraints' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.6',
+  'VERSION' => '0.7',
   'test' => {
     'TESTS' => 't/*.t'
   }

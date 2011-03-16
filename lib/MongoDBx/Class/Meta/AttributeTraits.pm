@@ -1,6 +1,6 @@
 package MongoDBx::Class::Meta::AttributeTraits;
 BEGIN {
-  $MongoDBx::Class::Meta::AttributeTraits::VERSION = '0.6';
+  $MongoDBx::Class::Meta::AttributeTraits::VERSION = '0.7';
 }
 
 # ABSTRACT: Attribute traits provided by MongoDBx::Class
@@ -11,13 +11,13 @@ MongoDBx::Class::Meta::AttributeTraits - Attribute traits provided by MongoDBx::
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =cut
 
 package MongoDBx::Class::Meta::AttributeTraits::Parsed;
 BEGIN {
-  $MongoDBx::Class::Meta::AttributeTraits::Parsed::VERSION = '0.6';
+  $MongoDBx::Class::Meta::AttributeTraits::Parsed::VERSION = '0.7';
 }
 
 # ABSTRACT: An attribute trait for attributes automatically expanded and collapsed by a parser class.
@@ -40,7 +40,7 @@ sub _build_parser {
 {
 	package Moose::Meta::Attribute::Custom::Trait::Parsed;
 BEGIN {
-  $Moose::Meta::Attribute::Custom::Trait::Parsed::VERSION = '0.6';
+  $Moose::Meta::Attribute::Custom::Trait::Parsed::VERSION = '0.7';
 }
 	sub register_implementation { 'MongoDBx::Class::Meta::AttributeTraits::Parsed' }
 }
@@ -51,7 +51,7 @@ Ido Perlmuter, C<< <ido at ido50.net> >>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

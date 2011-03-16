@@ -1,6 +1,6 @@
 package MongoDBx::Class::Connection;
 BEGIN {
-  $MongoDBx::Class::Connection::VERSION = '0.6';
+  $MongoDBx::Class::Connection::VERSION = '0.7';
 }
 
 # ABSTARCT: A connection to a MongoDB server
@@ -17,7 +17,7 @@ MongoDBx::Class::Connection - A connection to a MongoDB server
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 EXTENDS
 
@@ -26,12 +26,12 @@ L<MongoDB::Connection>
 =head1 SYNOPSIS
 
 	# connect to a MongoDB server
-	$mongodbx->connect(host => '10.10.10.10', port => 27017);
+	my $conn = $mongodbx->connect(host => '10.10.10.10', port => 27017);
 
 	# the connection object is automatically saved to the 'conn'
 	# attribute of the L<MongoDBx::Class> object (C<$mongodbx> above)
 
-	$mongodbx->conn->get_database('people');
+	$conn->get_database('people');
 
 =head1 DESCRIPTION
 
@@ -118,7 +118,7 @@ sub expand {
 	my $coll = $self->get_database($db_name)->get_collection($coll_name);
 
 	# return the document as is if it doesn't have a _class attribute
-	return $doc unless exists $doc->{_class};
+	return $doc unless $doc->{_class};
 
 	# remove the schema namespace from the document class (we do not
 	# use the full package name internally) and attempt to find that
@@ -192,6 +192,23 @@ sub expand {
 				foreach my $a (@{$doc->{$name}}) {
 					$a->{_class} = $edc_name;
 					push(@{$attrs{$_->name}}, $self->expand($coll_ns, $a));
+				}
+			} elsif ($_->{isa} =~ m/^HashRef/) {
+				my $name = $_->name;
+				$name =~ s!^_!!;
+				
+				$edc_name =~ s/^HashRef\[//;
+				$edc_name =~ s/\]$//;
+
+				next unless exists $doc->{$name} &&
+					    defined $doc->{$name} && 
+					    ref $doc->{$name} eq 'HASH';
+				
+				$attrs{$_->name} = {};
+				
+				foreach my $key (keys %{$doc->{$name}}) {
+					$doc->{$name}->{$key}->{_class} = $edc_name;
+					$attrs{$_->name}->{$key} = $self->expand($coll_ns, $doc->{$name}->{$key});
 				}
 			} else {
 				next unless exists $doc->{$_->name} && defined $doc->{$_->name};
@@ -276,7 +293,13 @@ sub collapse {
 sub _collapse_val {
 	my ($self, $val) = @_;
 
-	if (ref $val eq 'ARRAY') {
+	if (blessed $val && $val->isa('MongoDBx::Class::Reference')) {
+		return { '$ref' => $val->ref_coll, '$id' => $val->ref_id };
+	} elsif (blessed $val && $val->does('MongoDBx::Class::Document')) {
+		return { '$ref' => $val->_collection->name, '$id' => $val->_id };
+	} elsif (blessed $val && $val->does('MongoDBx::Class::EmbeddedDocument')) {
+		return $val->as_hashref;
+	} elsif (ref $val eq 'ARRAY') {
 		my @arr;
 		foreach (@$val) {
 			if (blessed $_ && $_->isa('MongoDBx::Class::Reference')) {
@@ -284,28 +307,26 @@ sub _collapse_val {
 			} elsif (blessed $_ && $_->does('MongoDBx::Class::Document')) {
 				push(@arr, { '$ref' => $_->_collection->name, '$id' => $_->_id });
 			} elsif (blessed $_ && $_->does('MongoDBx::Class::EmbeddedDocument')) {
-				my $hash = {};
-				foreach my $ha (keys %$_) {
-					next if $ha eq '_collection';
-					$hash->{$ha} = $_->{$ha};
-				}
-				push(@arr, $hash);
+				push(@arr, $_->as_hashref);
 			} else {
 				push(@arr, $_);
 			}
 		}
 		return \@arr;
-	} elsif (blessed $val && $val->isa('MongoDBx::Class::Reference')) {
-		return { '$ref' => $val->ref_coll, '$id' => $val->ref_id };
-	} elsif (blessed $val && $val->does('MongoDBx::Class::Document')) {
-		return { '$ref' => $val->_collection->name, '$id' => $val->_id };
-	} elsif (blessed $val && $val->does('MongoDBx::Class::EmbeddedDocument')) {
-		my $hash = {};
-		foreach my $ha (keys %$val) {
-			next if $ha eq '_collection' || $ha eq '_class';
-			$hash->{$ha} = $val->{$ha};
+	} elsif (ref $val eq 'HASH') {
+		my $h = {};
+		foreach (keys %$val) {
+			if (blessed $val->{$_} && $val->{$_}->isa('MongoDBx::Class::Reference')) {
+				$h->{$_} = { '$ref' => $val->{$_}->ref_coll, '$id' => $val->{$_}->ref_id };
+			} elsif (blessed $val->{$_} && $val->{$_}->does('MongoDBx::Class::Document')) {
+				$h->{$_} = { '$ref' => $val->{$_}->_collection->name, '$id' => $val->{$_}->_id };
+			} elsif (blessed $val->{$_} && $val->{$_}->does('MongoDBx::Class::EmbeddedDocument')) {
+				$h->{$_} = $val->{$_}->as_hashref;
+			} else {
+				$h->{$_} = $val->{$_};
+			}
 		}
-		return $hash;
+		return $h;
 	}
 
 	return $val;
@@ -355,7 +376,7 @@ L<MongoDBx::Class>, L<MongoDB::Connection>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

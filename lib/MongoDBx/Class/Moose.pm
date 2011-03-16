@@ -1,6 +1,6 @@
 package MongoDBx::Class::Moose;
 BEGIN {
-  $MongoDBx::Class::Moose::VERSION = '0.6';
+  $MongoDBx::Class::Moose::VERSION = '0.7';
 }
 
 # ABSTRACT: Extends Moose with common relationships for MongoDBx::Class documents
@@ -14,7 +14,7 @@ MongoDBx::Class::Moose - Extends Moose with common relationships for MongoDBx::C
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 PROVIDES
 
@@ -76,7 +76,7 @@ provides, and so is to replace C<use Moose> when creating document classes.
 =cut
 
 Moose::Exporter->setup_import_methods(
-	with_meta => [ 'belongs_to', 'has_one', 'has_many', 'holds_one', 'holds_many', 'joins_one', 'joins_many' ],
+	with_meta => [ 'belongs_to', 'has_one', 'has_many', 'holds_one', 'holds_many', 'defines_many', 'joins_one', 'joins_many' ],
 	also      => 'Moose',
 );
 
@@ -246,6 +246,52 @@ sub holds_many {
 	});
 }
 
+=head2 defines_many
+
+Specifies that the document has an attribute which holds a hash (a.k.a
+associative array or dictionary) of embedded documents in their entirety.
+These embedded documents are represented by a class that C<does>
+L<MongoDBx::Class::EmbeddedDocument>.
+
+	defines_many 'things' => (is => 'ro', isa => 'MyApp::Schema::Thing', predicate => 'has_things');
+
+When calling C<things()> on a document, a hash-ref is returned (not a hash!).
+
+Like C<holds_many> and C<holds_one>, this relationship has the unfortunate
+constraint of having to pass the full package name of the foreign document
+(e.g. MyApp::Schema::Thing above), whereas other relationship types
+require the class name only (e.g. Novel).
+
+In the database, this relationship is represented in the referencing (i.e.
+holding) document like this:
+
+	{ ...
+	  things => {
+		"mine" => { _class => 'MyApp::Schema::Thing', ... },
+		"his" => { _class => 'MyApp::Schema::Thing', ... },
+		"hers" => { _class => 'MyApp::Schema::Thing', ... },
+	  }
+	  ...
+	}
+
+=cut
+
+sub defines_many {
+	my ($meta, $name, %opts) = @_;
+
+	$opts{isa} = "HashRef[$opts{isa}]";
+	$opts{documentation} = 'MongoDBx::Class::EmbeddedDocument';
+
+	$meta->add_attribute('_'.$name => %opts);
+	$meta->add_method($name => sub {
+		my $self = shift;
+
+		my $attr = '_'.$name;
+
+		return $self->$attr || {};
+	});
+}
+
 =head2 joins_one
 
 Specifies that the document is referenced by one other document. The reference
@@ -384,7 +430,7 @@ L<MongoDBx::Class::Document>, L<MongoDBx::Class::EmbeddedDocument>, L<Moose>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010 Ido Perlmuter.
+Copyright 2010-2011 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
