@@ -4,7 +4,7 @@
       "Ido Perlmuter <ido@ido50.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.102160",
+   "generated_by" : "Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.110930",
    "license" : [
       "perl_5"
    ],
@@ -46,6 +46,14 @@
       }
    },
    "release_status" : "stable",
-   "version" : "0.7"
+   "resources" : {
+      "homepage" : "http://github.com/ido50/MongoDBx-Class/tree",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/ido50/MongoDBx-Class.git",
+         "web" : "http://github.com/ido50/MongoDBx-Class/tree"
+      }
+   },
+   "version" : "0.8"
 }
 

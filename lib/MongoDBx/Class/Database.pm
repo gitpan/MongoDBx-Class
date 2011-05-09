@@ -1,9 +1,9 @@
 package MongoDBx::Class::Database;
-BEGIN {
-  $MongoDBx::Class::Database::VERSION = '0.7';
-}
 
 # ABSTRACT: A MongoDBx::Class database object
+
+our $VERSION = "0.8";
+$VERSION = eval $VERSION;
 
 use Moose;
 use namespace::autoclean;
@@ -16,7 +16,7 @@ MongoDBx::Class::Database - A MongoDBx::Class database object
 
 =head1 VERSION
 
-version 0.7
+version 0.8
 
 =head1 EXTENDS
 

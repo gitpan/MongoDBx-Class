@@ -8,7 +8,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.31
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.102160'
+generated_by: 'Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.110930'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -30,4 +30,7 @@ requires:
   Moose::Util::TypeConstraints: 0
   namespace::autoclean: 0
   perl: 5.006
-version: 0.7
+resources:
+  homepage: http://github.com/ido50/MongoDBx-Class/tree
+  repository: git://github.com/ido50/MongoDBx-Class.git
+version: 0.8

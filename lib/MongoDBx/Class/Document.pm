@@ -1,9 +1,9 @@
 package MongoDBx::Class::Document;
-BEGIN {
-  $MongoDBx::Class::Document::VERSION = '0.7';
-}
 
 # ABSTRACT: A MongoDBx::Class document role
+
+our $VERSION = "0.8";
+$VERSION = eval $VERSION;
 
 use Moose::Role;
 use namespace::autoclean;
@@ -15,7 +15,7 @@ MongoDBx::Class::Document - A MongoDBx::Class document role
 
 =head1 VERSION
 
-version 0.7
+version 0.8
 
 =head1 SYNOPSIS
 

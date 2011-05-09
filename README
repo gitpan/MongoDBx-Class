@@ -2,13 +2,17 @@ NAME
     MongoDBx::Class - Flexible ORM for MongoDB databases
 
 VERSION
-    version 0.7
+    version 0.8
 
 SYNOPSIS
             use MongoDBx::Class;
 
             # create a new instance of the module and load a model schema
             my $dbx = MongoDBx::Class->new(namespace => 'MyApp::Model::DB');
+
+            # if MongoDBx::Class can't find your model schema (possibly because
+            # it exists in some different location), you can do this:
+            my $dbx = MongoDBx::Class->new(namespace => 'MyApp::Model::DB', search_dirs => ['/path/to/model/dir']);
 
             # connect to a MongoDB server
             my $conn = $dbx->connect(host => 'localhost', port => 27017);
@@ -163,6 +167,11 @@ ATTRIBUTES
     "MyApp::Schema"). Your document classes, structurally speaking, should
     be descendants of this namespace (e.g. "MyApp::Schema::Article",
     "MyApp::Schema::Post").
+
+  search_dirs
+    An array-ref of directories in which to search for the document classes.
+    Not required, useful if for some reason MongoDBx::Class can't find your
+    document classes.
 
   doc_classes
     A hash-ref of document classes found when loading the schema.

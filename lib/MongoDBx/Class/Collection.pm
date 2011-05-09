@@ -1,9 +1,9 @@
 package MongoDBx::Class::Collection;
-BEGIN {
-  $MongoDBx::Class::Collection::VERSION = '0.7';
-}
 
 # ABSTRACT: A MongoDBx::Class collection object
+
+our $VERSION = "0.8";
+$VERSION = eval $VERSION;
 
 use Moose;
 use namespace::autoclean;
@@ -17,7 +17,7 @@ MongoDBx::Class::Collection - A MongoDBx::Class collection object
 
 =head1 VERSION
 
-version 0.7
+version 0.8
 
 =head1 EXTENDS
 

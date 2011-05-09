@@ -1,4 +1,5 @@
 Changes
+INSTALL
 LICENSE
 MANIFEST
 MANIFEST.SKIP
@@ -23,11 +24,11 @@ lib/MongoDBx/Class/Reference.pm
 lib/MongoDBx/Class/Tutorial.pod
 t/00-load.t
 t/01-simple.t
-t/lib/Schema/Novel.pm
-t/lib/Schema/PersonName.pm
-t/lib/Schema/Review.pm
-t/lib/Schema/Synopsis.pm
-t/lib/Schema/Tag.pm
+t/lib/MongoDBxTestSchema/Novel.pm
+t/lib/MongoDBxTestSchema/PersonName.pm
+t/lib/MongoDBxTestSchema/Review.pm
+t/lib/MongoDBxTestSchema/Synopsis.pm
+t/lib/MongoDBxTestSchema/Tag.pm
 t/release-dist-manifest.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
