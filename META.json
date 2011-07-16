@@ -4,7 +4,7 @@
       "Ido Perlmuter <ido@ido50.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.110930",
+   "generated_by" : "Dist::Zilla version 4.200008, CPAN::Meta::Converter version 2.110440",
    "license" : [
       "perl_5"
    ],
@@ -16,7 +16,7 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.31"
+            "ExtUtils::MakeMaker" : "6.30"
          }
       },
       "runtime" : {
@@ -34,26 +34,29 @@
             "Moose::Exporter" : 0,
             "Moose::Role" : 0,
             "Moose::Util::TypeConstraints" : 0,
+            "Try::Tiny" : 0,
             "namespace::autoclean" : 0,
             "perl" : "5.006"
          }
       },
       "test" : {
          "requires" : {
+            "Data::Dumper" : 0,
             "DateTime" : 0,
-            "Test::More" : 0
+            "Test::More" : 0,
+            "Time::HiRes" : 0
          }
       }
    },
    "release_status" : "stable",
    "resources" : {
-      "homepage" : "http://github.com/ido50/MongoDBx-Class/tree",
+      "homepage" : "http://github.com/ido50/MongoDBx-Class",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/ido50/MongoDBx-Class.git",
-         "web" : "http://github.com/ido50/MongoDBx-Class/tree"
+         "url" : "http://github.com/ido50/MongoDBx-Class",
+         "web" : "http://github.com/ido50/MongoDBx-Class"
       }
    },
-   "version" : "0.8"
+   "version" : "0.9"
 }
 

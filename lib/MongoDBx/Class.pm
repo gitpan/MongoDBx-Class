@@ -2,7 +2,7 @@ package MongoDBx::Class;
 
 # ABSTRACT: Flexible ORM for MongoDB databases
 
-our $VERSION = "0.8";
+our $VERSION = "0.9";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -10,6 +10,8 @@ use Moose::Util::TypeConstraints;
 use namespace::autoclean;
 use MongoDB 0.40;
 use MongoDBx::Class::Connection;
+use MongoDBx::Class::ConnectionPool::Backup;
+use MongoDBx::Class::ConnectionPool::Rotated;
 use MongoDBx::Class::Database;
 use MongoDBx::Class::Collection;
 use MongoDBx::Class::Cursor;
@@ -45,9 +47,11 @@ MongoDBx::Class - Flexible ORM for MongoDB databases
 
 =head1 VERSION
 
-version 0.8
+version 0.9
 
 =head1 SYNOPSIS
+
+Normal usage:
 
 	use MongoDBx::Class;
 
@@ -76,10 +80,11 @@ version 0.8
 
 	$person->delete;
 
+See L<MongoDBx::Class::ConnectionPool> for simple connection pool usage.
+
 =head1 DESCRIPTION
 
-WARNING: MongoDBx::Class is still in beta status. Please do not rely on
-it yet for production use.
+WARNING: This is beta software.
 
 L<MongoDBx::Class> is a flexible object relational mapper (ORM) for
 L<MongoDB> databases. Given a schema-like collection of document classes,
@@ -179,6 +184,12 @@ fit well with MongoDB. L<Mongoose::Intro|Mongoose::Intro/"Why not use KiokuDB?">
 already gives a pretty convincing case when and why you should or shouldn't
 want to use KiokuDB.
 
+=head2 CONNECTION POOLING
+
+Since version 0.9, C<MongoDBx::Class> provides experimental, simple connection pooling for
+applications. Take a look at L<MongoDBx::Class::ConnectionPool> for more
+information.
+
 =head2 CAVEATS AND THINGS TO CONSIDER
 
 There are a few caveats and important facts to take note of when using
@@ -277,6 +288,24 @@ sub connect {
 	$opts{doc_classes} = $self->doc_classes;
 
 	return MongoDBx::Class::Connection->new(%opts);
+}
+
+=head2 pool( %opts )
+
+=cut
+
+sub pool {
+	my ($self, %opts) = @_;
+
+	$opts{params} ||= {};
+	$opts{params}->{namespace} = $self->namespace;
+	$opts{params}->{doc_classes} = $self->doc_classes;
+
+	if ($opts{type} && $opts{type} eq 'rotated') {
+		return MongoDBx::Class::ConnectionPool::Rotated->new(%opts);
+	} else {
+		return MongoDBx::Class::ConnectionPool::Backup->new(%opts);
+	}
 }
 
 =head1 INTERNAL METHODS

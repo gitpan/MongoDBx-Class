@@ -2,7 +2,7 @@ package MongoDBx::Class::Connection;
 
 # ABSTARCT: A connection to a MongoDB server
 
-our $VERSION = "0.8";
+our $VERSION = "0.9";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -17,7 +17,7 @@ MongoDBx::Class::Connection - A connection to a MongoDB server
 
 =head1 VERSION
 
-version 0.8
+version 0.9
 
 =head1 EXTENDS
 
@@ -64,6 +64,11 @@ A boolean value indicating whether to use safe operations (e.g. inserts
 and updates) by default - without the need to pass C<< { safe => 1 } >> to
 relevant methods - or not. False by default.
 
+=head2 is_backup
+
+This boolean attribute is used by L<MongoDBx::Class::ConnectionPool> objects
+that use a backup connection.
+
 =cut
 
 has 'namespace' => (is => 'ro', isa => 'Str', required => 1);
@@ -71,6 +76,8 @@ has 'namespace' => (is => 'ro', isa => 'Str', required => 1);
 has 'doc_classes' => (is => 'ro', isa => 'HashRef', required => 1);
 
 has 'safe' => (is => 'rw', isa => 'Bool', default => 0);
+
+has 'is_backup' => (is => 'ro', isa => 'Bool', default => 0);
 
 =head1 OBJECT METHODS
 

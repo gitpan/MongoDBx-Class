@@ -2,7 +2,7 @@ package MongoDBx::Class::Document;
 
 # ABSTRACT: A MongoDBx::Class document role
 
-our $VERSION = "0.8";
+our $VERSION = "0.9";
 $VERSION = eval $VERSION;
 
 use Moose::Role;
@@ -15,7 +15,7 @@ MongoDBx::Class::Document - A MongoDBx::Class document role
 
 =head1 VERSION
 
-version 0.8
+version 0.9
 
 =head1 SYNOPSIS
 
@@ -151,6 +151,8 @@ You can pass an options hash-ref just like with the C<update()> method
 of L<MongoDBx::Class::Collection>, but only if you pass an update object
 also.
 
+Returns the output of L<MongoDB::Collection>'s original C<update()> method.
+
 =cut
 
 sub update {
@@ -162,10 +164,12 @@ sub update {
 		delete $doc->{_class};
 
 		# update the database entry
-		$self->_collection->update({ _id => $self->_id }, { '$set' => $doc }, $_[1]);
+		my $ret = $self->_collection->update({ _id => $self->_id }, { '$set' => $doc }, $_[1]);
 
 		# update the object itself
 		$self->_update_self;
+
+		return $ret;
 	} else {
 		my $doc = { _class => $self->_class };
 		foreach ($self->meta->get_all_attributes) {
@@ -181,7 +185,7 @@ sub update {
 
 			$doc->{$name} = $val;
 		}
-		$self->_collection->update({ _id => $self->_id }, $self->_connection->collapse($doc), $_[1]);
+		return $self->_collection->update({ _id => $self->_id }, $self->_connection->collapse($doc), $_[1]);
 	}
 }
 
@@ -203,9 +207,11 @@ sub delete {
 	$self->_collection->remove({ _id => $self->_id });
 }
 
-sub remove {
-	shift->delete;
-}
+sub remove { shift->delete }
+
+=head1 INTERNAL METHODS
+
+The following methods are only to be used internally.
 
 =head2 _database()
 
@@ -249,10 +255,6 @@ sub _attributes {
 
 	return sort @names;
 }
-
-=head1 INTERNAL METHODS
-
-The following methods are only to be used internally.
 
 =head2 _update_self()
 

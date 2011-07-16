@@ -2,9 +2,11 @@ NAME
     MongoDBx::Class - Flexible ORM for MongoDB databases
 
 VERSION
-    version 0.8
+    version 0.9
 
 SYNOPSIS
+    Normal usage:
+
             use MongoDBx::Class;
 
             # create a new instance of the module and load a model schema
@@ -32,9 +34,10 @@ SYNOPSIS
 
             $person->delete;
 
+    See MongoDBx::Class::ConnectionPool for simple connection pool usage.
+
 DESCRIPTION
-    WARNING: MongoDBx::Class is still in beta status. Please do not rely on
-    it yet for production use.
+    WARNING: This is beta software.
 
     MongoDBx::Class is a flexible object relational mapper (ORM) for MongoDB
     databases. Given a schema-like collection of document classes,
@@ -129,6 +132,11 @@ DESCRIPTION
     fit well with MongoDB. Mongoose::Intro already gives a pretty convincing
     case when and why you should or shouldn't want to use KiokuDB.
 
+  CONNECTION POOLING
+    Since version 0.9, "MongoDBx::Class" provides experimental, simple
+    connection pooling for applications. Take a look at
+    MongoDBx::Class::ConnectionPool for more information.
+
   CAVEATS AND THINGS TO CONSIDER
     There are a few caveats and important facts to take note of when using
     MongoDBx::Class as of today:
@@ -197,6 +205,7 @@ OBJECT METHODS
     like how connection is made in MongoDB (and to allow multiple
     connections). This change breaks backwords compatibility.
 
+  pool( %opts )
 INTERNAL METHODS
     The following methods are only to be used internally.
 

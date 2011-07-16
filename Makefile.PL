@@ -2,9 +2,9 @@
 use strict;
 use warnings;
 
-BEGIN { require 5.006; }
+use 5.006;
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
@@ -12,11 +12,13 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'Flexible ORM for MongoDB databases',
   'AUTHOR' => 'Ido Perlmuter <ido@ido50.net>',
   'BUILD_REQUIRES' => {
+    'Data::Dumper' => '0',
     'DateTime' => '0',
-    'Test::More' => '0'
+    'Test::More' => '0',
+    'Time::HiRes' => '0'
   },
   'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+    'ExtUtils::MakeMaker' => '6.30'
   },
   'DISTNAME' => 'MongoDBx-Class',
   'EXE_FILES' => [],
@@ -36,9 +38,10 @@ my %WriteMakefileArgs = (
     'Moose::Exporter' => '0',
     'Moose::Role' => '0',
     'Moose::Util::TypeConstraints' => '0',
+    'Try::Tiny' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.8',
+  'VERSION' => '0.9',
   'test' => {
     'TESTS' => 't/*.t'
   }
