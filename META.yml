@@ -36,4 +36,4 @@ requires:
 resources:
   homepage: http://github.com/ido50/MongoDBx-Class
   repository: http://github.com/ido50/MongoDBx-Class
-version: 0.9
+version: 0.91

@@ -2,7 +2,7 @@ package MongoDBx::Class::ConnectionPool;
 
 # ABSTARCT: A simple connection pool for MongoDBx::Class
 
-our $VERSION = "0.9";
+our $VERSION = "0.91";
 $VERSION = eval $VERSION;
 
 use Moose::Role;
@@ -15,7 +15,7 @@ MongoDBx::Class::ConnectionPool - A simple connection pool for MongoDBx::Class
 
 =head1 VERSION
 
-version 0.9
+version 0.91
 
 =head1 SYNOPSIS
 
@@ -108,7 +108,7 @@ of the connection to be given to the next end-user.
 
 =head2 params
 
-A hash-ref of parameters to pass to C<MongoDB::Connection->new()> when
+A hash-ref of parameters to pass to C<< MongoDB::Connection->new() >> when
 creating a new connection. See L<MongoDB::Connection/"ATTRIBUTES"> for
 more information.
 

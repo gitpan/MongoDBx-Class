@@ -2,7 +2,7 @@ package MongoDBx::Class;
 
 # ABSTRACT: Flexible ORM for MongoDB databases
 
-our $VERSION = "0.9";
+our $VERSION = "0.91";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -47,7 +47,7 @@ MongoDBx::Class - Flexible ORM for MongoDB databases
 
 =head1 VERSION
 
-version 0.9
+version 0.91
 
 =head1 SYNOPSIS
 
@@ -290,7 +290,14 @@ sub connect {
 	return MongoDBx::Class::Connection->new(%opts);
 }
 
-=head2 pool( %opts )
+=head2 pool( [ type => $type, max_conns => $max_conns, params => \%params, ... ] )
+
+Creates a new connection pool (see L<MongoDBx::Class::ConnectionPool> for
+more info) and returns it. C<type> is either 'rotated' or 'backup' (the
+default). C<params> is a hash-ref of parameters that can be passed to
+C<< MongoDB::Connection->new() >> when creating connections in the pool.
+See L<MongoDBx::Class::ConnectionPool/"ATTRIBUTES"> for a complete list
+of attributes that can be passed.
 
 =cut
 

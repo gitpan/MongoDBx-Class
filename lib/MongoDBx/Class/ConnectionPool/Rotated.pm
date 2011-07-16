@@ -2,7 +2,7 @@ package MongoDBx::Class::ConnectionPool::Rotated;
 
 # ABSTARCT: A simple connection pool with rotated connections
 
-our $VERSION = "0.9";
+our $VERSION = "0.91";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -18,7 +18,7 @@ MongoDBx::Class::ConnectionPool::Rotated - A simple connection pool with rotated
 
 =head1 VERSION
 
-version 0.9
+version 0.91
 
 =head1 SYNOPSIS
 

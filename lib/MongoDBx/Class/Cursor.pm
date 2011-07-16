@@ -2,7 +2,7 @@ package MongoDBx::Class::Cursor;
 
 # ABSTRACT: A MongoDBx::Class cursor/iterator object for query results
 
-our $VERSION = "0.9";
+our $VERSION = "0.91";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -16,7 +16,7 @@ MongoDBx::Class::Cursor - A MongoDBx::Class cursor/iterator object for query res
 
 =head1 VERSION
 
-version 0.9
+version 0.91
 
 =head1 EXTENDS
 

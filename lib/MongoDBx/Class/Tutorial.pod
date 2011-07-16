@@ -4,7 +4,7 @@ MongoDBx::Class::Tutorial - Tutorial for using MongoDBx::Class
 
 =head1 VERSION
 
-version 0.9
+version 0.91
 
 =head1 INTRODUCTION
 

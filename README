@@ -2,7 +2,7 @@ NAME
     MongoDBx::Class - Flexible ORM for MongoDB databases
 
 VERSION
-    version 0.9
+    version 0.91
 
 SYNOPSIS
     Normal usage:
@@ -205,7 +205,14 @@ OBJECT METHODS
     like how connection is made in MongoDB (and to allow multiple
     connections). This change breaks backwords compatibility.
 
-  pool( %opts )
+  pool( [ type => $type, max_conns => $max_conns, params => \%params, ... ] )
+    Creates a new connection pool (see MongoDBx::Class::ConnectionPool for
+    more info) and returns it. "type" is either 'rotated' or 'backup' (the
+    default). "params" is a hash-ref of parameters that can be passed to
+    "MongoDB::Connection->new()" when creating connections in the pool. See
+    "ATTRIBUTES" in MongoDBx::Class::ConnectionPool for a complete list of
+    attributes that can be passed.
+
 INTERNAL METHODS
     The following methods are only to be used internally.
 

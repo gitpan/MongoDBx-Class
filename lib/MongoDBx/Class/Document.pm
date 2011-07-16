@@ -2,7 +2,7 @@ package MongoDBx::Class::Document;
 
 # ABSTRACT: A MongoDBx::Class document role
 
-our $VERSION = "0.9";
+our $VERSION = "0.91";
 $VERSION = eval $VERSION;
 
 use Moose::Role;
@@ -15,7 +15,7 @@ MongoDBx::Class::Document - A MongoDBx::Class document role
 
 =head1 VERSION
 
-version 0.9
+version 0.91
 
 =head1 SYNOPSIS
 
