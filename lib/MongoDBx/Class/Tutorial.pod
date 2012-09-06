@@ -4,7 +4,7 @@ MongoDBx::Class::Tutorial - Tutorial for using MongoDBx::Class
 
 =head1 VERSION
 
-version 0.91
+version 1.00
 
 =head1 INTRODUCTION
 
@@ -15,7 +15,7 @@ L<MongoDBx::Class/"DESCRIPTION">.
 =head1 CREATING DOCUMENT CLASSES
 
 The first step towards using MongoDBx::Class is creating document classes.
-Lets say your application is called MyApp, and that it reviews novels
+Let's say your application is called MyApp, and that it reviews novels
 by popular authors. Every novel has a title (its name), the full name of
 its author, its release year, a synopsis, the date the novel was added
 to the database, a list of tags categorizing the novel, a list of related
@@ -154,7 +154,9 @@ document class representing novels:
 	has 'year' => (is => 'ro', isa => 'Int', predicate => 'has_year', writer => 'set_year');
 
 	has 'added' => (is => 'ro', isa => 'DateTime', traits => ['Parsed'], required => 1);
-	
+
+	has 'review_count' => (is => 'rw', isa => 'Int', traits => ['Transient'], builder => '_build_review_count');
+
 	holds_many 'tags' => (is => 'ro', isa => 'MyApp::Schema::Tag', predicate => 'has_tags');
 
 	joins_one 'synopsis' => (is => 'ro', isa => 'Synopsis', coll => 'synopsis', ref => 'novel');
@@ -162,6 +164,8 @@ document class representing novels:
 	has_many 'related_novels' => (is => 'ro', isa => 'Novel', predicate => 'has_related_novels', writer => 'set_related_novels', clearer => 'clear_related_novels');
 
 	joins_many 'reviews' => (is => 'ro', isa => 'Review', coll => 'reviews', ref => 'novel');
+
+	sub _build_review_count { shift->reviews->count }
 
 	sub print_related_novels {
 		my $self = shift;
@@ -198,7 +202,7 @@ C<has_many> for the list of references to related novels.
 You will notice that when using the C<holds_one> and C<holds_many> relationship
 types, we've given the full package names to the C<isa> option (such as
 MyApp::Schema::PersonName), while in other relationship types, we've given
-the class names only (such as 'Snyopsis'). This inconsistency is only
+the class names only (such as 'Synopsis'). This inconsistency is only
 temporary, and will change in future versions, so keep your finger on the
 pulse.
 
@@ -232,6 +236,33 @@ documentation):
 	good for web apps, and also makes it easier to edit dates from the
 	MongoDB shell. But most importantly, it also allows sorting by date.
 
+Also note the 'review_count' attribute, which has the 'Transient' trait.
+This trait means the attribute is not to be saved in the database, even
+though it is one of the document's attributes. This is useful for calculated
+attributes, or any supporting attributes you add to a document class whose
+state should not be saved. You should note that if for some reason a
+document in the database I<does> have an attribute marked as transient in
+the document's class (for example if you added it to the document manually),
+the value of this attribute will also be ignored when the document is read
+from the database.
+
+As you can see, the C<joins_many> relationship creates a one-to-many
+relationship between one document to one or more other documents which can be
+considered "child documents". In this example, there is a one-to-many
+relationship between a 'novel' document and one or more 'review' documents.
+A C<joins_many> relationship is implemented with a cursor. For example,
+calling the C<reviews()> method on a C<Novel> object will generally
+return a L<MongoDBx::Class::Cursor> object for a C<find()> query that
+searches for documents in the 'reviews' collection, whose 'novel' attribute
+references the C<Novel> document. In the C<Novel> class above, you will
+notice the C<reviews()> method is also modified with Moose's C<around>
+method modifier. This example illustrates the fact that C<joins_many> is
+implemented with a cursor. Suppose you know you will always want to call
+C<reviews()> and get the child documents sorted by date (or other fields).
+The above modification simply sorts the cursor before returning it to the
+caller. Of course, this is merely an example of the things you can do with
+the C<joins_many> relationship.
+
 Continuing on, lets create our two embedded document classes. We'll start
 with PersonName:
 
@@ -252,8 +283,8 @@ with PersonName:
 		my $self = shift;
 
 		my $name = $self->first_name;
-		$name .= ' '.$self->middle_name.' ' if $self->has_middle_name;
-		$name .= $self->last_name;
+		$name .= ' '.$self->middle_name if $self->has_middle_name;
+		$name .= ' '.$self->last_name;
 
 		return $name;
 	}
@@ -444,7 +475,7 @@ is the automatic expanding and collapsing of documents. Documents are
 automatically expanded when inserting documents only if the C<safe> option
 is on, as mentioned in the previous section.
 
-Lets create a novel document:
+Let's create a novel document:
 
 	my $db = $conn->get_database('myapp');
 	my $novels_coll = $db->get_collection('novels');
@@ -556,9 +587,9 @@ automatically expanded.
 
 	print $novel->author->name; # again, prints 'Arthur Conan Doyle'
 
-Lets search for reviews written by a certain reviewer:
+Let's search for reviews written by a certain reviewer:
 
-	my $cursor = $db->reviews->find({ reviewer => 'Some Guy' })->sort({ score => -1 }); # we can also use C<query()> or C<search()>, they're the same method
+	my $cursor = $db->reviews->find({ reviewer => 'Some Guy' })->sort({ score => -1 }); # the `find` method also has two synonyms: `query` and `search`
 
 This gives a L<MongoDBx::Class::Cursor> back:
 
@@ -590,7 +621,7 @@ to update a specific document.
 
 =back
 
-First, lets take a look at the first way. Suppose we want to cheat and update
+Let's take a look at the first way. Suppose we want to cheat and update
 all reviews for "The Valley of Fear" with a score of five:
 
 	$db->reviews->update({ 'novel.$id' => $novel->_id }, { '$set' => { score => 5 } }, { multiple => 1 }); # updates are by default singular, so we add the 'multiple' option
@@ -744,7 +775,7 @@ L<MongoDBx::Class>, L<MongoDB>, L<http://www.mongodb.org/>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010-2011 Ido Perlmuter.
+Copyright 2010-2012 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

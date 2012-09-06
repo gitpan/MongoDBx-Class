@@ -13,6 +13,8 @@ has 'year' => (is => 'ro', isa => 'Int', predicate => 'has_year', writer => 'set
 
 has 'added' => (is => 'ro', isa => 'DateTime', traits => ['Parsed'], required => 1);
 
+has 'review_count' => (is => 'rw', isa => 'Int', traits => ['Transient'], lazy => 1, builder => '_build_review_count');
+
 holds_many 'tags' => (is => 'ro', isa => 'MongoDBxTestSchema::Tag', predicate => 'has_tags');
 
 joins_one 'synopsis' => (is => 'ro', isa => 'Synopsis', coll => 'synopsis', ref => 'novel');
@@ -20,6 +22,8 @@ joins_one 'synopsis' => (is => 'ro', isa => 'Synopsis', coll => 'synopsis', ref 
 has_many 'related_novels' => (is => 'ro', isa => 'Novel', predicate => 'has_related_novels', writer => 'set_related_novels', clearer => 'clear_related_novels');
 
 joins_many 'reviews' => (is => 'ro', isa => 'Review', coll => 'reviews', ref => 'novel');
+
+sub _build_review_count { shift->reviews->count }
 
 sub print_related_novels {
 	my $self = shift;

@@ -2,7 +2,7 @@ package MongoDBx::Class::Document;
 
 # ABSTRACT: A MongoDBx::Class document role
 
-our $VERSION = "0.91";
+our $VERSION = "1.00";
 $VERSION = eval $VERSION;
 
 use Moose::Role;
@@ -15,7 +15,7 @@ MongoDBx::Class::Document - A MongoDBx::Class document role
 
 =head1 VERSION
 
-version 0.91
+version 1.00
 
 =head1 SYNOPSIS
 
@@ -34,6 +34,8 @@ version 0.91
 	has 'year' => (is => 'ro', isa => 'Int', predicate => 'has_year', writer => 'set_year');
 
 	has 'added' => (is => 'ro', isa => 'DateTime', traits => ['Parsed'], required => 1);
+
+	has 'review_count' => (is => 'rw', isa => 'Int', traits => ['Transient'], builder => '_build_review_count');
 	
 	holds_many 'tags' => (is => 'ro', isa => 'MyApp::Schema::Tag', predicate => 'has_tags');
 
@@ -42,6 +44,8 @@ version 0.91
 	has_many 'related_novels' => (is => 'ro', isa => 'Novel', predicate => 'has_related_novels', writer => 'set_related_novels', clearer => 'clear_related_novels');
 
 	joins_many 'reviews' => (is => 'ro', isa => 'Review', coll => 'reviews', ref => 'novel');
+
+	sub _build_review_count { shift->reviews->count }
 
 	sub print_related_novels {
 		my $self = shift;
@@ -323,7 +327,7 @@ L<MongoDBx::Class::Moose>, L<MongoDBx::Class::EmbeddedDocument>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010-2011 Ido Perlmuter.
+Copyright 2010-2012 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

@@ -13,7 +13,7 @@ my $dbx = MongoDBx::Class->new(namespace => 'MongoDBxTestSchema');
 if (scalar(keys %{$dbx->doc_classes}) != 5) {
 	plan skip_all => "Temporary skip due to schema not being found";
 } else {
-	plan tests => 20;
+	plan tests => 27;
 }
 
 SKIP: {
@@ -23,7 +23,7 @@ SKIP: {
 		my $conn;
 		eval { $conn = $dbx->connect };
 
-		skip "Can't connect to MongoDB server", 19 if $@;
+		skip "Can't connect to MongoDB server", 26 if $@;
 
 		$conn->safe(1);
 		is($conn->safe, 1, "Using safe operations by default");
@@ -103,7 +103,7 @@ SKIP: {
 		is($novel->year, 1915, "novel's year successfully changed");
 		is($novel->author->middle_name, 'Xoxa', "author's middle name successfully changed");
 
-		is_deeply([$novel->_attributes], [qw/_id added author related_novels tags title year/], '_attributes okay');
+		is_deeply([$novel->_attributes], [qw/_id added author related_novels review_count tags title year/], '_attributes okay');
 		is_deeply([$novel->author->_attributes], [qw/first_name last_name middle_name/], 'embedded _attributes okay');
 
 		my $found_novel = $db->novels->find_one($novel->id);
@@ -132,6 +132,47 @@ SKIP: {
 		}
 		is($john_john, 1, "Successfully replaced reviewer for all reviews");
 		is_deeply(\@scores, [8, 6, 4], "Successfully increased all scores by three");
+
+		# Test transient Attributes
+		is($novel->review_count, 3, 'Correct number of reviews found');
+		$novel->review_count(4);
+		is($novel->review_count, 4, 'Set number of reviews is correct');
+		$novel->update;
+
+		# read novel from db again, without expanding it, to
+		# verify the review_count attribute was not saved
+		my $novel_fetched = $db->novels->find({ _id => $novel->_id })->next(1);
+		ok(!exists $novel_fetched->{review_count}, 'Transient value was not saved in DB');
+
+		$novel = $db->novels->find_one($novel->id); # refresh from DB
+		$novel->update({ review_count => 4 });
+		is($novel->review_count, 3, 'Transient value not updated'); # really the correct behaviour?
+
+		# refresh again
+		$novel_fetched = $db->novels->find({ _id => $novel->_id })->next(1);
+		ok(!exists $novel_fetched->{review_count}, 'Transient value was not saved in DB');
+		
+		my $novel2 = $novels_coll->insert({
+			_class => 'Novel',
+			title => 'Modern Perl',
+			year => 2010,
+			author => {
+				first_name => '',
+				middle_name => 'chromatic',
+				last_name => '',
+			},
+			added => DateTime->now(time_zone => 'Asia/Jerusalem'),
+			tags => [
+				{ category => 'programming', subcategory => 'perl' },
+			],
+			review_count => 2,
+		});
+
+		# refresh novel 2 without expanding
+		my $novel2_fetched = $db->novels->find({ _id => $novel2->_id })->next(1);
+		ok(!exists $novel2_fetched->{review_count}, 'Transient value was not saved in DB');
+
+		is($novel2->review_count, 0, 'Transient value is not inflated');
 
 		$db->drop;
 	}

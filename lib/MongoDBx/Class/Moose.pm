@@ -2,7 +2,7 @@ package MongoDBx::Class::Moose;
 
 # ABSTRACT: Extends Moose with common relationships for MongoDBx::Class documents
 
-our $VERSION = "0.91";
+our $VERSION = "1.00";
 $VERSION = eval $VERSION;
 
 use Moose ();
@@ -14,7 +14,7 @@ MongoDBx::Class::Moose - Extends Moose with common relationships for MongoDBx::C
 
 =head1 VERSION
 
-version 0.91
+version 1.00
 
 =head1 PROVIDES
 
@@ -117,6 +117,7 @@ sub belongs_to {
 		my $self = shift;
 
 		my $attr = '_'.$name;
+		return unless $self->$attr;
 		return $self->$attr->load;
 	});
 }
@@ -314,8 +315,8 @@ performed like so:
 
 	$db->get_collection('synopsis')->find_one({ 'novel.$id' => $doc->_id })
 
-Note that passing a 'required' option to C<joins_one> has no effect at all,\
-the existance of the referencing document is never enforced, so C<undef>
+Note that passing a 'required' option to C<joins_one> has no effect at all,
+the existence of the referencing document is never enforced, so C<undef>
 can be returned.
 
 =cut
@@ -430,7 +431,7 @@ L<MongoDBx::Class::Document>, L<MongoDBx::Class::EmbeddedDocument>, L<Moose>.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010-2011 Ido Perlmuter.
+Copyright 2010-2012 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published

@@ -4,7 +4,7 @@
       "Ido Perlmuter <ido@ido50.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.200008, CPAN::Meta::Converter version 2.110440",
+   "generated_by" : "Dist::Zilla version 4.300023, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -21,42 +21,44 @@
       },
       "runtime" : {
          "requires" : {
-            "Carp" : 0,
-            "DateTime::Format::W3CDTF" : 0,
-            "Module::Load" : 0,
-            "Module::Pluggable" : 0,
+            "Carp" : "0",
+            "DateTime::Format::W3CDTF" : "0",
+            "Module::Load" : "0",
+            "Module::Pluggable" : "0",
             "MongoDB" : "0.40",
-            "MongoDB::Collection" : 0,
-            "MongoDB::Connection" : 0,
-            "MongoDB::Cursor" : 0,
-            "MongoDB::Database" : 0,
-            "Moose" : 0,
-            "Moose::Exporter" : 0,
-            "Moose::Role" : 0,
-            "Moose::Util::TypeConstraints" : 0,
-            "Try::Tiny" : 0,
-            "namespace::autoclean" : 0,
+            "MongoDB::Collection" : "0",
+            "MongoDB::Connection" : "0",
+            "MongoDB::Cursor" : "0",
+            "MongoDB::Database" : "0",
+            "Moose" : "0",
+            "Moose::Exporter" : "0",
+            "Moose::Role" : "0",
+            "Moose::Util::TypeConstraints" : "0",
+            "Try::Tiny" : "0",
+            "namespace::autoclean" : "0",
             "perl" : "5.006"
          }
       },
       "test" : {
          "requires" : {
-            "Data::Dumper" : 0,
-            "DateTime" : 0,
-            "Test::More" : 0,
-            "Time::HiRes" : 0
+            "Data::Dumper" : "0",
+            "DateTime" : "0",
+            "Test::More" : "0",
+            "Time::HiRes" : "0",
+            "strict" : "0",
+            "warnings" : "0"
          }
       }
    },
    "release_status" : "stable",
    "resources" : {
-      "homepage" : "http://github.com/ido50/MongoDBx-Class",
+      "homepage" : "https://github.com/ido50/MongoDBx-Class",
       "repository" : {
          "type" : "git",
-         "url" : "http://github.com/ido50/MongoDBx-Class",
-         "web" : "http://github.com/ido50/MongoDBx-Class"
+         "url" : "https://github.com/ido50/MongoDBx-Class.git",
+         "web" : "https://github.com/ido50/MongoDBx-Class"
       }
    },
-   "version" : "0.91"
+   "version" : "1.00"
 }
 
