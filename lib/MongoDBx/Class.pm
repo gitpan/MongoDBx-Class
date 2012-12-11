@@ -2,7 +2,7 @@ package MongoDBx::Class;
 
 # ABSTRACT: Flexible ORM for MongoDB databases
 
-our $VERSION = "1.00";
+our $VERSION = "1.01";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -47,7 +47,7 @@ MongoDBx::Class - Flexible ORM for MongoDB databases
 
 =head1 VERSION
 
-version 1.00
+version 1.01
 
 =head1 SYNOPSIS
 

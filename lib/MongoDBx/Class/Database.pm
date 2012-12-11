@@ -2,7 +2,7 @@ package MongoDBx::Class::Database;
 
 # ABSTRACT: A MongoDBx::Class database object
 
-our $VERSION = "1.00";
+our $VERSION = "1.01";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -16,7 +16,7 @@ MongoDBx::Class::Database - A MongoDBx::Class database object
 
 =head1 VERSION
 
-version 1.00
+version 1.01
 
 =head1 EXTENDS
 

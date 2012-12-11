@@ -36,14 +36,16 @@ my %WriteMakefileArgs = (
     "MongoDB::Connection" => 0,
     "MongoDB::Cursor" => 0,
     "MongoDB::Database" => 0,
+    "MongoDB::MongoClient" => 0,
     "Moose" => 0,
     "Moose::Exporter" => 0,
     "Moose::Role" => 0,
     "Moose::Util::TypeConstraints" => 0,
     "Try::Tiny" => 0,
-    "namespace::autoclean" => 0
+    "namespace::autoclean" => 0,
+    "version" => 0
   },
-  "VERSION" => "1.00",
+  "VERSION" => "1.01",
   "test" => {
     "TESTS" => "t/*.t"
   }
