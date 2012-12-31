@@ -40,4 +40,4 @@ requires:
 resources:
   homepage: https://github.com/ido50/MongoDBx-Class
   repository: https://github.com/ido50/MongoDBx-Class.git
-version: 1.01
+version: 1.02

@@ -2,7 +2,7 @@ NAME
     MongoDBx::Class - Flexible ORM for MongoDB databases
 
 VERSION
-    version 1.01
+    version 1.02
 
 SYNOPSIS
     Normal usage:

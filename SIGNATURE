@@ -14,34 +14,34 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-SHA1 593de5fdc2ef2064fc33dd7fe9480442764f4450 Changes
+SHA1 aebd8c878873c9e53541f220440894b9a3cbb9a5 Changes
 SHA1 c1ecbd37c4014c98a8844b2d4ee560392833398d INSTALL
-SHA1 d38085d38a0d811f563a79af5ca3594c53b9d948 LICENSE
+SHA1 4dceae0eaef7a9ac83dea9d378c954bfce55223a LICENSE
 SHA1 ff663b55ed9bc68bc8676e978582449936b8e420 MANIFEST
 SHA1 20c1431f6ffa70f555428944c8583a2b59ad5676 MANIFEST.SKIP
-SHA1 af6589607e534ae16a9ae8e447db3932414687fb META.json
-SHA1 353ee138d074c3e6c8f277df51cf8b2e119967d9 META.yml
-SHA1 abb8b2dff0cadde7f30d1d09e560f5ef9bccaa89 Makefile.PL
-SHA1 5a0f9144c95076bb9bf2b07a62ce20d93bd1f6ab README
+SHA1 addff859dd2a619cd61ab709c0d07b79c32d9834 META.json
+SHA1 582a992fffebe685cc7f7bce5dae860e01bdfaeb META.yml
+SHA1 985ebb1d390d11a6bad989e073ca827d986cb7e9 Makefile.PL
+SHA1 81567244d9d4800444f1acea18d45671af30eb82 README
 SHA1 ac705ba18654c6db427017a3321e117d2d03fddd dist.ini
-SHA1 d5d9bc5c8420ccb6ed0888154a87195da9c76cf8 lib/MongoDBx/Class.pm
-SHA1 9982a11aefb0e9ae2fc4e53a79d95cf60305314d lib/MongoDBx/Class/Collection.pm
-SHA1 b6b523429666f6bd524fdad6ccb92ff2fe669d9c lib/MongoDBx/Class/Connection.pm
-SHA1 8bea3d26538da927c61dcd52bfbbb7bcf626b5a8 lib/MongoDBx/Class/ConnectionPool.pm
-SHA1 c4e64414173cd71d681e7428fe9054646b4eb059 lib/MongoDBx/Class/ConnectionPool/Backup.pm
-SHA1 7324fae15e9014901217bebd583ffe672d4080ed lib/MongoDBx/Class/ConnectionPool/Rotated.pm
-SHA1 a0126e497bd2a02c42481700366780c731d585b4 lib/MongoDBx/Class/Cursor.pm
-SHA1 1c1faabaa77068fb205fcb19fb5f6a86b760fb15 lib/MongoDBx/Class/Database.pm
-SHA1 610f537537f49e31139423bf7ea9eebb0ab0d92c lib/MongoDBx/Class/Document.pm
-SHA1 39a3df3d5967e25d71979dc80b5bf7e781cddb2d lib/MongoDBx/Class/EmbeddedDocument.pm
-SHA1 eae9c66683d63473bf32fd0725d82bb7abb9cf5d lib/MongoDBx/Class/Meta/AttributeTraits.pm
-SHA1 04ee5e8feadb86982c2471901f2351e19bc98a09 lib/MongoDBx/Class/Moose.pm
-SHA1 cdbd2b9c462ec5d8638fe4f631deb92abee85839 lib/MongoDBx/Class/ParsedAttribute.pm
-SHA1 256cd9d7ba49828787afafda7c6a9bc6f4d0076a lib/MongoDBx/Class/ParsedAttribute/DateTime.pm
-SHA1 98c70419b59f4c87c734bcdbacdd3486ba4f7d77 lib/MongoDBx/Class/Reference.pm
-SHA1 191a85efe327011e880dacc829e4c3c276c07e1c lib/MongoDBx/Class/Tutorial.pod
+SHA1 c5633bc1ec2a3e48523474795b9b0e48029d8dc1 lib/MongoDBx/Class.pm
+SHA1 643843dfd0f12d633c2f99eb401f32db5965b3d7 lib/MongoDBx/Class/Collection.pm
+SHA1 9909847fffadd65ab450edc984097e408849d59a lib/MongoDBx/Class/Connection.pm
+SHA1 ba14ec2e78d2b097d360778c65da3c5f63a5ee8a lib/MongoDBx/Class/ConnectionPool.pm
+SHA1 aba5aa42982de0378d7ed8f1535364bdca8e064a lib/MongoDBx/Class/ConnectionPool/Backup.pm
+SHA1 442404e70bf1512b07f94c9ee24c7afd720fca1f lib/MongoDBx/Class/ConnectionPool/Rotated.pm
+SHA1 01175806f63d65a014c88e3f82c787b27d0e0512 lib/MongoDBx/Class/Cursor.pm
+SHA1 9d8790a62084e219b765ee87bb1fa1db3ef562aa lib/MongoDBx/Class/Database.pm
+SHA1 f0c49c138cded2f866b97ea5dc9e76ea82b03ea0 lib/MongoDBx/Class/Document.pm
+SHA1 6ea891b39d3d003ed04ae42316d202a8ea2a89ef lib/MongoDBx/Class/EmbeddedDocument.pm
+SHA1 2a59e18031f1f51fc2e7488d36311c928b566ac1 lib/MongoDBx/Class/Meta/AttributeTraits.pm
+SHA1 a036dac8bcf89681d058b3210368dd9fa2b5f364 lib/MongoDBx/Class/Moose.pm
+SHA1 9a30f5112ab4d1601b41b861e07aba666de5217e lib/MongoDBx/Class/ParsedAttribute.pm
+SHA1 955c4b996253fc9b08a43cbc8979ba2d9fe842b9 lib/MongoDBx/Class/ParsedAttribute/DateTime.pm
+SHA1 3e7c04c9d94c35dc08894fd76b78a6b00277f1fb lib/MongoDBx/Class/Reference.pm
+SHA1 876e06c810edb0682d343e0661b5fd73c3ca1f60 lib/MongoDBx/Class/Tutorial.pod
 SHA1 6075d4e8f18b5d8bcb2c59c727d8e73df3df6ad3 t/00-load.t
-SHA1 48c59f660fe476d787b917551d2644e496f7ff42 t/01-simple.t
+SHA1 ab8ec5a966706d8f8914916583149e8d3f571b73 t/01-simple.t
 SHA1 ccf4163cc4d1b0c058937ec49b5e52185727e3fa t/02-pool.t
 SHA1 e397b5d8d6150e22a930c39d4262c5b8774dbd68 t/lib/MongoDBxTestSchema/Novel.pm
 SHA1 39f1e4936c93de752199553bfcafc4ad06d7ceb3 t/lib/MongoDBxTestSchema/PersonName.pm
@@ -54,7 +54,7 @@ SHA1 b30cbdfaf935017c4568c0c91b242438cb87786e t/release-pod-syntax.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.19 (GNU/Linux)
 
-iF4EAREIAAYFAlDHkWUACgkQa4OHQAFM10eK1gEAieeyyQ7cPu2ldf2DEB7D6hOJ
-pdb92RV4SIY5rMOyET8A/RscKe6DIL7aaQZYoRApiR8GWVzUzLIbhyNp+L3qCuFV
-=lhpB
+iF4EAREIAAYFAlDiFBIACgkQa4OHQAFM10efSAD/fyImGTQSkGvra/oNyjKA+FQJ
+SIOXLaOW+51RU/LgejwBAKY5q8a2s6pjOICTybuqJanbyxkxB4G4XqViEPvK0CfU
+=lR2g
 -----END PGP SIGNATURE-----
