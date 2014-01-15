@@ -2,7 +2,7 @@ NAME
     MongoDBx::Class - Flexible ORM for MongoDB databases
 
 VERSION
-    version 1.02
+    version 1.03
 
 SYNOPSIS
     Normal usage:
@@ -265,7 +265,7 @@ ACKNOWLEDGEMENTS
     *   Rodrigo de Oliveira, author of Mongoose, whose code greatly assisted
         me in writing MongoDBx::Class.
 
-    *   Thomas Müller, for adding support for the Transient trait.
+    *   Thomas MÃ¼ller, for adding support for the Transient trait.
 
     *   Dan Dascalescu, for fixing typos and other problems in the
         documentation.

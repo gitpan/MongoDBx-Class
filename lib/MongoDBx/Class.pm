@@ -2,7 +2,7 @@ package MongoDBx::Class;
 
 # ABSTRACT: Flexible ORM for MongoDB databases
 
-our $VERSION = "1.02";
+our $VERSION = "1.03";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -41,13 +41,15 @@ coerce 'ArrayOfMongoDBx::Class::CoercedReference'
 		return \@arr;
 	};
 
+=encoding utf8
+
 =head1 NAME
 
 MongoDBx::Class - Flexible ORM for MongoDB databases
 
 =head1 VERSION
 
-version 1.02
+version 1.03
 
 =head1 SYNOPSIS
 

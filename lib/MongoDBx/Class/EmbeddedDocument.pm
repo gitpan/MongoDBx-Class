@@ -2,7 +2,7 @@ package MongoDBx::Class::EmbeddedDocument;
 
 # ABSTRACT: A MongoDBx::Class embedded (sub-)document role
 
-our $VERSION = "1.02";
+our $VERSION = "1.03";
 $VERSION = eval $VERSION;
 
 use Moose::Role;
@@ -14,7 +14,7 @@ MongoDBx::Class::EmbeddedDocument - A MongoDBx::Class embedded (sub-)document ro
 
 =head1 VERSION
 
-version 1.02
+version 1.03
 
 =head1 SYNOPSIS
 

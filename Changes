@@ -1,5 +1,8 @@
 Revision history for MongoDBx::Class
 
+1.03      2014-01-15 21:25:15 Asia/Jerusalem
+	- Bugfix new versions of MongoDB
+
 1.02      2013-01-01 00:38:58 Asia/Jerusalem
 	- Fixed previous failed attempt at adapting MongoDBx::Class
 	  to the new MongoDB version

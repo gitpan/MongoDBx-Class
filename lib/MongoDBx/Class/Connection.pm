@@ -2,7 +2,7 @@ package MongoDBx::Class::Connection;
 
 # ABSTARCT: A connection to a MongoDB server
 
-our $VERSION = "1.02";
+our $VERSION = "1.03";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -22,7 +22,7 @@ MongoDBx::Class::Connection - A connection to a MongoDB server
 
 =head1 VERSION
 
-version 1.02
+version 1.03
 
 =head1 EXTENDS
 
@@ -186,7 +186,7 @@ sub expand {
 					ref_id => $ref->{'$id'},
 				));
 			}
-		# is this an embedded document (or array-ref of embedded documents)?			
+		# is this an embedded document (or array-ref of embedded documents)?
 		} elsif ($_->documentation && $_->documentation eq 'MongoDBx::Class::EmbeddedDocument') {
 			my $edc_name = $_->{isa};
 			$edc_name =~ s/^${ns}:://;
