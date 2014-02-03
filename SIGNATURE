@@ -14,34 +14,34 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-SHA1 21dd2a2a4c48b8ce88e5c37772c59070e96207c6 Changes
+SHA1 7db7b3b69cd0192bb773e303d7d5edebdeee9d3d Changes
 SHA1 c1ecbd37c4014c98a8844b2d4ee560392833398d INSTALL
 SHA1 dbdedae5625f12657ab635ad548315cb917552e9 LICENSE
 SHA1 ff663b55ed9bc68bc8676e978582449936b8e420 MANIFEST
 SHA1 20c1431f6ffa70f555428944c8583a2b59ad5676 MANIFEST.SKIP
-SHA1 f27b2631c5e4a2d3c956f3dd8a9395a3a9045990 META.json
-SHA1 fe3242d512a3b604f601b67f546ed11c00f28b40 META.yml
-SHA1 95208a14d9c4185305080bea7709f395b74dd4bd Makefile.PL
-SHA1 874edc46e95b120f5cc524618b24e5649bf9974c README
+SHA1 e2772e0d034b95be30e21a7af5596f92ab2f071d META.json
+SHA1 38420d8944f6c01b12ac8aa38df7981a4e64c7c3 META.yml
+SHA1 9085845137388e296b5014a0127116d08c8d13dd Makefile.PL
+SHA1 788c701937fe9ddfb2f686f95eaf05fc0f5c8ad9 README
 SHA1 ac705ba18654c6db427017a3321e117d2d03fddd dist.ini
-SHA1 e153ccb0a6131fef8cff9e5b6ad0146aafd7e90a lib/MongoDBx/Class.pm
-SHA1 a94ab443fdc2d96b452931559f33a3f3bdaf27b7 lib/MongoDBx/Class/Collection.pm
-SHA1 e75ae58e6d14d0f4b1cd6569d63af38726238c76 lib/MongoDBx/Class/Connection.pm
-SHA1 757a684aae19c0fe33f2ff38f1c2c6543f0f4af6 lib/MongoDBx/Class/ConnectionPool.pm
-SHA1 e0e82c51846a925234028707bb6b6572f5d973e2 lib/MongoDBx/Class/ConnectionPool/Backup.pm
-SHA1 a8ff785269ff64417b6a36acec6f156af7d7b471 lib/MongoDBx/Class/ConnectionPool/Rotated.pm
-SHA1 ae3b77ab77e8ddf6e148c00fca059eb498057d2e lib/MongoDBx/Class/Cursor.pm
-SHA1 6e4fc40e01f5eeeb6212b4de67afb40394c445d0 lib/MongoDBx/Class/Database.pm
-SHA1 38401f328f57dda161c10be7fc22a270b3d4d1e1 lib/MongoDBx/Class/Document.pm
-SHA1 19219e64d550ae44709a954c90cb328c9817bbbf lib/MongoDBx/Class/EmbeddedDocument.pm
-SHA1 2ff54819d819544264105b02391d1561f109278e lib/MongoDBx/Class/Meta/AttributeTraits.pm
-SHA1 c63bd52c80a1671980617f3ee4355125136671d6 lib/MongoDBx/Class/Moose.pm
-SHA1 e0f8b4054b96a4c155e1e13005f6e596c88c305a lib/MongoDBx/Class/ParsedAttribute.pm
-SHA1 afd23ecd453eec36274a5a80432c3134e6a9ece9 lib/MongoDBx/Class/ParsedAttribute/DateTime.pm
-SHA1 1c8d5b9b395d85aca546eb5d66da1bfb667a5766 lib/MongoDBx/Class/Reference.pm
-SHA1 ff26e3aed4bb6392eca03a5cddc3dc625cfac879 lib/MongoDBx/Class/Tutorial.pod
+SHA1 c4d2a8c77091f6602b38313f97371b92e44e4e51 lib/MongoDBx/Class.pm
+SHA1 da4e80b1febd91b3c3b6c22230272b4e61f9320a lib/MongoDBx/Class/Collection.pm
+SHA1 d27f6328042b73a9c4eb9f20de4bbceb7a87401f lib/MongoDBx/Class/Connection.pm
+SHA1 fa837e8388649492a4f8cfcac67409ce4f4ce190 lib/MongoDBx/Class/ConnectionPool.pm
+SHA1 8b9401a57623c4525c899460b97561aa56b13e01 lib/MongoDBx/Class/ConnectionPool/Backup.pm
+SHA1 8806a000ecefdacf8f4b67848a132da48b3fa3bc lib/MongoDBx/Class/ConnectionPool/Rotated.pm
+SHA1 a9d225176fa6733c4b29a982a06815425bc1443e lib/MongoDBx/Class/Cursor.pm
+SHA1 3432f0a4d2b4b4c31ff085c124f93b016bb8a5bb lib/MongoDBx/Class/Database.pm
+SHA1 ecd08f400a2b7eeca1c8009e9fcbf434a430bab0 lib/MongoDBx/Class/Document.pm
+SHA1 570b978b0507b525348c5429e7214c7f9a3f3d38 lib/MongoDBx/Class/EmbeddedDocument.pm
+SHA1 77d70f8c49335e340e1fac63bc20ba0433986bac lib/MongoDBx/Class/Meta/AttributeTraits.pm
+SHA1 4a46428f5980572d48b3d33270862a809f533f47 lib/MongoDBx/Class/Moose.pm
+SHA1 f034fb78267ff8b743fbf012804cd06a3cdeefb4 lib/MongoDBx/Class/ParsedAttribute.pm
+SHA1 7c0bf5039ebff4b680dd987b5205fb1db0688295 lib/MongoDBx/Class/ParsedAttribute/DateTime.pm
+SHA1 4e87da3a0f6d04e84f80e6652dfd8d28c4fcd41e lib/MongoDBx/Class/Reference.pm
+SHA1 ceb01d6f3e1ef59fde268c854246676500f27227 lib/MongoDBx/Class/Tutorial.pod
 SHA1 6075d4e8f18b5d8bcb2c59c727d8e73df3df6ad3 t/00-load.t
-SHA1 ab8ec5a966706d8f8914916583149e8d3f571b73 t/01-simple.t
+SHA1 354b26e1814294f333a4b8c4021f5e2cbe2ddc07 t/01-simple.t
 SHA1 ccf4163cc4d1b0c058937ec49b5e52185727e3fa t/02-pool.t
 SHA1 e397b5d8d6150e22a930c39d4262c5b8774dbd68 t/lib/MongoDBxTestSchema/Novel.pm
 SHA1 39f1e4936c93de752199553bfcafc4ad06d7ceb3 t/lib/MongoDBxTestSchema/PersonName.pm
@@ -54,7 +54,7 @@ SHA1 b30cbdfaf935017c4568c0c91b242438cb87786e t/release-pod-syntax.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.22 (GNU/Linux)
 
-iF4EAREIAAYFAlLW4KoACgkQa4OHQAFM10eI1wD9FCHmvckOCU9MW0pg5+EKLjwg
-2W5baGIsu2AJ8Fx7+sQA/jq9w/D7Cx4dRt6rGw3TKAwR8xkQgKKEa/UQ9rCRQqyS
-=+wfI
+iF4EAREIAAYFAlLwBo8ACgkQa4OHQAFM10feWQEAp0B0PNqZOgofjDIW1/LJrxy0
+BXPVRRVKzP3OVtHB9MsA/3DSASCvvtndt4hDldZrpQkywnmdGw2YX0FLkb4aYInu
+=jAZa
 -----END PGP SIGNATURE-----

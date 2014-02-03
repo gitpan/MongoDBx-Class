@@ -41,4 +41,4 @@ requires:
 resources:
   homepage: https://github.com/ido50/MongoDBx-Class
   repository: https://github.com/ido50/MongoDBx-Class.git
-version: 1.03
+version: 1.030001

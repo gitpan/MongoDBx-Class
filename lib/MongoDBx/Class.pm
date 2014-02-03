@@ -2,7 +2,7 @@ package MongoDBx::Class;
 
 # ABSTRACT: Flexible ORM for MongoDB databases
 
-our $VERSION = "1.03";
+our $VERSION = "1.030001";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -49,7 +49,7 @@ MongoDBx::Class - Flexible ORM for MongoDB databases
 
 =head1 VERSION
 
-version 1.03
+version 1.030001
 
 =head1 SYNOPSIS
 
@@ -71,10 +71,10 @@ Normal usage:
 	$conn->safe(1); # we could've also just passed "safe => 1" to $dbx->connect() above
 
 	# get a MongoDB database
-	my $db = $conn->get_database('people');
+	my $db = $conn->get_database('myapp');
 
 	# insert a person
-	my $person = $db->insert({ name => 'Some Guy', birth_date => '1984-06-12', _class => 'Person' });
+	my $person = $db->get_collection('people')->insert({ name => 'Some Guy', birth_date => '1984-06-12', _class => 'Person' });
 
 	print "Created person ".$person->name." (".$person->id.")\n";
 
@@ -336,19 +336,6 @@ sub BUILD {
 	}
 }
 
-=head1 TODO
-
-=over 6
-
-=item * Improve the tests.
-
-=item * Make the C<isa> option in L<MongoDBx::Class::Moose>'s relationship
-types consistent. Either use the full package names or the short class names.
-
-=item * Try to find a way to not require documents to have the _class attribute.
-
-=back
-
 =head1 AUTHOR
 
 Ido Perlmuter, C<< <ido at ido50.net> >>
@@ -406,7 +393,7 @@ me in writing MongoDBx::Class.
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright 2010-2012 Ido Perlmuter.
+Copyright 2010-2014 Ido Perlmuter.
 
 This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
