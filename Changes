@@ -1,5 +1,8 @@
 Revision history for MongoDBx::Class
 
+1.030002  2014-02-04 21:43:35 Asia/Jerusalem
+	- Bugfix: wrong number of tests to skip in 01-simple.t
+
 1.030001  2014-02-03 23:13:49 Asia/Jerusalem
 	- Documentation fixes: joins_many relationship example was
 	  wrong (Keith Broughton); Insert in synopsis was wrong.

@@ -2,7 +2,7 @@ package MongoDBx::Class::ConnectionPool::Backup;
 
 # ABSTARCT: A simple connection pool with a backup connection
 
-our $VERSION = "1.030001";
+our $VERSION = "1.030002";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -17,7 +17,7 @@ MongoDBx::Class::ConnectionPool::Backup - A simple connection pool with a backup
 
 =head1 VERSION
 
-version 1.030001
+version 1.030002
 
 =head1 SYNOPSIS
 
